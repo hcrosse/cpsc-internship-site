@@ -1,13 +1,6 @@
-# In this directory, run the following command to build this builder.
-# $ gcloud builds submit . --config=cloudbuild.yaml
-
 steps:
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install']
-  dir: 'functions/autodeploy'
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['test']
-  dir: 'functions/autodeploy'
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', '[YOUR_DEPLOYED_FUNCTION_NAME]', '[YOUR_FUNCTION_TRIGGER]', '--runtime', '[YOUR_RUNTIME]', '--entry-point', '[YOUR_FUNCTION_NAME_IN_CODE]']
-  dir: 'functions/autodeploy'
+  args: ['install']
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+timeout: "1600s"

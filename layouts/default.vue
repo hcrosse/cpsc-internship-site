@@ -52,12 +52,31 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <v-text-field
+        class="search-bar"
+        append-icon="search"
+        label="Search"
+        click:append="changeRoute"
+        solo-inverted
+        flat
+        hide-details
+        single-line
+      />
+
+      <!-- Mess with button width, height, margins/padding -->
+      <!-- v-toolbar-items -->
       <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
+        flat
       >
-        <v-icon>menu</v-icon>
+        Register
       </v-btn>
+
+      <v-btn
+        flat
+      >
+        Login
+      </v-btn>
+      <!-- /v-toolbar-items -->
     </v-toolbar>
     <v-content>
       <v-container>
@@ -117,3 +136,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .search-bar {
+    max-width: 25em;
+  }
+</style>

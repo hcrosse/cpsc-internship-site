@@ -16,15 +16,7 @@
 export default {
   data() {
     return {
-      ratings: ['Very Good', 'Good', 'Average', 'Bad', 'Very Bad'],
-      menu: false,
-      menu2: false,
-      companyName: null,
-      companyAddress: null,
-      selectedRating: null,
-      startdate: null,
-      enddate: null,
-      selectedIndustrys: []
+      placeholderVariable: false
     }
   }
 }

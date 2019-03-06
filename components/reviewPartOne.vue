@@ -19,7 +19,7 @@
           />
 
           <h3>Select industry types that are applicable to your internship:</h3>
-          <div class="mr-4 ml-4 whiteback userGroupHeight">
+          <div class="mr-4 ml-4">
             <v-layout row wrap>
               <v-flex xs6>
                 <v-checkbox v-model="selectedIndustrys" label="Government Contracting" value="gov" />

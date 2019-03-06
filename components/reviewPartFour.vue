@@ -15,6 +15,18 @@
               outline
             />
           </v-flex>
+          <v-layout row wrap>
+            <v-flex xs6>
+              <v-textarea
+                v-model="summary"
+                auto-grow
+                box
+                color="blue"
+                label="Summary of your experience with the company"
+                rows="4"
+              />
+            </v-flex>
+          </v-layout>
         </div>
       </v-card>
     </v-app>
@@ -26,7 +38,8 @@ export default {
   data() {
     return {
       ratings: ['Very Good', 'Good', 'Average', 'Bad', 'Very Bad'],
-      selectedRating: null
+      selectedRating: null,
+      summary: null
     }
   }
 }

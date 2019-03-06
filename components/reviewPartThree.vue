@@ -57,6 +57,43 @@
             </v-flex>
             <v-spacer />
           </v-layout>
+          <v-flex xs12 sm6 d-flex>
+            <v-select
+              v-model="selectedEnvironment"
+              :items="possibleEnvironments"
+              label="Working Environment Description"
+              outline
+            />
+          </v-flex>
+          <h3>Skills Utilizied / Learned</h3>
+          <div class="mr-4 ml-4">
+            <v-layout row wrap>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="Python" value="gov" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="Java" value="edu" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="Javascript" value="web" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="C++/C" value="app" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="Linux" value="software" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="Ruby" value="hardware" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="PHP" value="it" />
+              </v-flex>
+              <v-flex xs6>
+                <v-checkbox v-model="selectedIndustrys" label="C#" value="research" />
+              </v-flex>
+            </v-layout>
+          </div>
         </div>
       </v-card>
     </v-app>
@@ -70,7 +107,9 @@ export default {
       menu: false,
       menu2: false,
       startdate: null,
-      enddate: null
+      enddate: null,
+      possibleEnvironments: ['Open Office', 'Private Office', 'Cubicle', 'Lab', 'Remote Position', 'Other'],
+      selectedEnvironment: null
     }
   }
 }

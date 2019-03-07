@@ -1,33 +1,29 @@
 <template>
   <div>
-    <div v-if="pageNumber==1">
-      <v-btn @click="nextPage()">
+    <v-layout align-center justify-center row fill-height>
+      <v-btn
+        :disabled="prevDisabled"
+        @click="prevPage()"
+      >
+        Prev page
+      </v-btn>
+      <v-btn
+        :disabled="nextDisabled"
+        @click="nextPage()"
+      >
         Next page
       </v-btn>
+    </v-layout>
+    <div v-if="pageNumber==1">
       <part1 />
     </div>
     <div v-else-if="pageNumber==2">
-      <v-btn @click="prevPage()">
-        Prev page
-      </v-btn>
-      <v-btn @click="nextPage()">
-        Next page
-      </v-btn>
       <part2 />
     </div>
     <div v-else-if="pageNumber==3">
-      <v-btn @click="prevPage()">
-        Prev page
-      </v-btn>
-      <v-btn @click="nextPage()">
-        Next page
-      </v-btn>
       <part3 />
     </div>
     <div v-else-if="pageNumber==4">
-      <v-btn @click="prevPage()">
-        Prev page
-      </v-btn>
       <part4 />
     </div>
   </div>
@@ -49,7 +45,9 @@ export default {
   },
   data() {
     return {
-      pageNumber: 1
+      pageNumber: 1,
+      prevDisabled: true,
+      nextDisabled: false
     }
   },
   methods: {
@@ -57,10 +55,24 @@ export default {
       if (this.pageNumber < 4) {
         this.pageNumber++
       }
+      this.evaluateButtons()
     },
     prevPage: function () {
       if (this.pageNumber > 1) {
         this.pageNumber--
+      }
+      this.evaluateButtons()
+    },
+    evaluateButtons: function () {
+      if (this.pageNumber <= 1) {
+        this.prevDisabled = true
+        this.nextDisabled = false
+      } else if (this.pageNumber >= 4) {
+        this.prevDisabled = false
+        this.nextDisabled = true
+      } else {
+        this.prevDisabled = false
+        this.nextDisabled = false
       }
     }
   }

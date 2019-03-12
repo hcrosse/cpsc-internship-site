@@ -31,6 +31,7 @@
       fixed
       app
     >
+      <<<<<<< HEAD
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-btn
         icon
@@ -51,6 +52,8 @@
         <v-icon>remove</v-icon>
       </v-btn>
 
+      =======
+      >>>>>>> 8153ed465cd7d6f4498b341c68987faf774746da
       <v-toolbar-title v-text="title" />
 
       <v-spacer />
@@ -133,7 +136,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'UMW CPSC Internship Board'
     }
   }
 }

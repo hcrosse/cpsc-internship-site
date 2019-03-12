@@ -4,7 +4,6 @@
   >
     <v-toolbar
       prominent
-      extended
       :clipped-left="clipped"
       fixed
       app

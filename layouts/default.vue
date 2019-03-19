@@ -7,12 +7,12 @@
       app
     >
       <v-toolbar-title v-text="title" />
+
       <v-spacer />
       <v-text-field
         class="search-bar"
-        append-icon="search"
+        prepend-inner-icon="search"
         label="Search"
-        click:append="changeRoute"
         solo-inverted
         flat
         hide-details
@@ -152,6 +152,6 @@ export default {
 
 <style>
   .search-bar {
-    max-width: 25em;
+    max-width: 50vw;
   }
 </style>

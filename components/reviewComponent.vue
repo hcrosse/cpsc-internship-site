@@ -74,6 +74,9 @@ export default {
         this.prevDisabled = false
         this.nextDisabled = false
       }
+    },
+    submitNewReview: function () {
+      /* make sure to validate login/session token */
     }
   }
 }

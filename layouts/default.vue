@@ -1,33 +1,8 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     <v-toolbar
       color="primary"
       dark
-      :clipped-left="clipped"
       fixed
       app
     >
@@ -45,43 +20,86 @@
       />
       <v-spacer />
 
-      <!-- Mess with button width, height, margins/padding -->
-      <!-- v-toolbar-items -->
-      <v-btn
-        flat
-      >
-        Register
-      </v-btn>
+      <div v-if="adminLoggedIn==true">
+        <v-btn
+          flat
+          to="/admin"
+          @click="swapToAdminView()"
+        >
+          Admin Page
+        </v-btn>
+        <v-btn
+          flat
+          to="/"
+          @click="attemptLogout()"
+        >
+          Logout
+        </v-btn>
+      </div>
+      <div v-else-if="userLoggedIn==true">
+        <v-btn
+          flat
+          to="/createreview"
+          @click="navigateToReviewCreation()"
+        >
+          Create Review
+        </v-btn>
 
-      <v-btn
-        flat
-      >
-        Login
-      </v-btn>
-      <!-- /v-toolbar-items -->
+        <v-btn
+          flat
+          to="/"
+          @click="attemptLogout()"
+        >
+          Logout
+        </v-btn>
+      </div>
+      <div v-else>
+        <!-- can use line below for the "info" symbol for providing login requirement info-->
+        <!-- only works if we import and npm install the font awesome image library-->
+        <i class="fas fa-info-circle" />
+        <form>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="Email"
+            pattern="[a-z0-9A-Z._%+-]+@mail.umw.edu"
+            title="Must be a valid UMW email address ending in @mail.umw.edu"
+          >
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+          >
+
+          <v-btn
+            flat
+            type="submit"
+            @click="attemptRegister()"
+          >
+            Register
+          </v-btn>
+
+          <v-btn
+            flat
+            type="submit"
+            @click="attemptLogin()"
+          >
+            Login
+          </v-btn>
+        </form>
+          <!-- /v-toolbar-items -->
+        </v-text-field>
+      </div>
     </v-toolbar>
+
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>
-              compare_arrows
-            </v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+
     <v-footer
       :fixed="fixed"
       app
@@ -95,25 +113,38 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
+      adminLoggedIn: false,
+      userLoggedIn: false,
+      placeholderVariable: false,
+      title: 'UMW CPSC Internship Board',
       fixed: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'UMW CPSC Internship Board'
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    attemptLogin: function () {
+      if (this.email === 'admin') {
+        this.adminLoggedIn = true
+        this.userLoggedIn = false
+      } else {
+        this.adminLoggedIn = false
+        this.userLoggedIn = true
+      }
+    },
+    attemptLogout: function () {
+      this.userLoggedIn = false
+      this.adminLoggedIn = false
+    },
+    attemptRegister: function () {
+      this.placeholderVariable = true
+    },
+    swapToAdminView: function () {
+      /* make sure to validate/check for admin session token */
+      this.placeholderVariable = true
+    },
+    navigateToReviewCreation: function () {
+
     }
   }
 }

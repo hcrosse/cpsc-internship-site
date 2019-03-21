@@ -23,8 +23,6 @@ export default {
   data() {
     return {
       reviewOpened: false,
-      prevDisabled: true,
-      nextDisabled: false,
       reviewIndexClicked: -1
     }
   },

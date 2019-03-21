@@ -103,13 +103,6 @@ export default {
     openReview(index) {
       this.$parent.reviewOpened = true
       this.$parent.reviewIndexClicked = index
-      const i = this.selected.indexOf(index)
-
-      if (i > -1) {
-        this.selected.splice(i, 1)
-      } else {
-        this.selected.push(index)
-      }
     }
   }
 }

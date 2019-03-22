@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fullcard">
     <div v-if="reviewOpened">
       <singleReview />
     </div>
@@ -33,3 +33,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.row {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  width: 50%;
+}
+</style>

@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <div class="fullcard">
     <div v-if="reviewOpened">
-      <singleReview />
+      <transition name="component-fade" mode="out-in">
+        <singleReview />
+      </transition>
     </div>
     <div v-else>
-      <reviewList />
+      <transition name="component-fade" mode="out-in">
+        <reviewList />
+      </transition>
     </div>
   </div>
 </template>
@@ -33,3 +37,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.row {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  width: 50%;
+}
+</style>

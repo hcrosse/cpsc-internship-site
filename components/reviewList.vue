@@ -1,35 +1,27 @@
 <template>
   <div class="reviewList">
-    <v-app id="theList">
-      <v-layout row>
-        <v-flex xs12>
-          <v-card>
-            <v-list two-line>
-              <template v-for="(item, index) in items">
-                <v-list-tile
-                  :key="item.title"
-                  avatar
-                  ripple
-                  @click="openReview(index)"
-                >
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    <v-list-tile-sub-title class="text--primary">
-                      {{ item.headline }}
-                    </v-list-tile-sub-title>
-                    <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-divider
-                  v-if="index + 1 < items.length"
-                  :key="index"
-                />
-              </template>
-            </v-list>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-app>
+    <v-list two-line>
+      <template v-for="(item, index) in items">
+        <v-list-tile
+          :key="item.title"
+          avatar
+          ripple
+          @click="openReview(index)"
+        >
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-sub-title class="text--primary">
+              {{ item.headline }}
+            </v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider
+          v-if="index + 1 < items.length"
+          :key="index"
+        />
+      </template>
+    </v-list>
   </div>
 </template>
 
@@ -63,38 +55,18 @@ export default {
         },
         {
           headline: 'Summer Engineering Intern',
-          title: 'Netflix',
+          title: 'NASA',
           subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
         },
         {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
+          headline: 'Intern',
+          title: 'Uber',
           subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
         },
         {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
           subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Summer Engineering Intern',
-          title: 'Netflix',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.Details for job sentence 4. Details for job sentence 5. Details for job sentence 6.'
         }
       ]
     }

@@ -1,7 +1,22 @@
 <template>
   <div>
-    <reviewListFullComponent />
-    <!-- insert GoogleMap Component here.  Will likely need to mess with styling to get them sidebyside -->
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout child-flex>
+          <v-card>
+            <div class="row">
+              <div class="column left">
+                <reviewListFullComponent />
+              </div>
+              <div class="column right">
+                <img src="../img/map.jpg">
+                <!-- insert GoogleMap Component here -->
+              </div>
+            </div>
+          </v-card>
+        </v-layout>
+      </v-container>
+    </v-content>
   </div>
 </template>
 

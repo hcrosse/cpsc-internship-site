@@ -1,10 +1,14 @@
 <template>
   <div class="fullcard">
     <div v-if="reviewOpened">
-      <singleReview />
+      <transition name="component-fade" mode="out-in">
+        <singleReview />
+      </transition>
     </div>
     <div v-else>
-      <reviewList />
+      <transition name="component-fade" mode="out-in">
+        <reviewList />
+      </transition>
     </div>
   </div>
 </template>

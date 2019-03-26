@@ -1,19 +1,25 @@
 <template>
   <div>
-    <v-layout align-center justify-center row fill-height>
-      <v-btn
-        :disabled="prevDisabled"
-        @click="prevPage()"
-      >
-        Prev page
-      </v-btn>
-      <v-btn
-        :disabled="nextDisabled"
-        @click="nextPage()"
-      >
-        Next page
-      </v-btn>
-    </v-layout>
+    <div class="row">
+      <div class="column prevPage">
+        <v-btn
+          style="width:100%"
+          :disabled="prevDisabled"
+          @click="prevPage()"
+        >
+          Prev page
+        </v-btn>
+      </div>
+      <div class="column nextPage">
+        <v-btn
+          style="width:100%"
+          :disabled="nextDisabled"
+          @click="nextPage()"
+        >
+          Next page
+        </v-btn>
+      </div>
+    </div>
     <div v-if="pageNumber==1">
       <part1 />
     </div>

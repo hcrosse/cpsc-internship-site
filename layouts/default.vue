@@ -110,6 +110,8 @@
 </template>
 
 <script>
+import { auth } from '~/plugins/firebase.js'
+
 export default {
   data() {
     return {
@@ -138,6 +140,7 @@ export default {
     },
     attemptRegister: function () {
       this.placeholderVariable = true
+      auth.createUserWithEmailAndPassword(this.email, this.password)
     },
     swapToAdminView: function () {
       /* make sure to validate/check for admin session token */

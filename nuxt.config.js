@@ -40,7 +40,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
+    "@/plugins/vue2-google-maps",
+    "@/plugins/vuetify"
   ],
 
   /*

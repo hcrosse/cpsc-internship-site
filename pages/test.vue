@@ -1,54 +1,85 @@
 <template>
-  <div class="Map" />
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    />
-    <test />
-  </v-layout>
+  <div>
+    <div>
+      <h2>Search and add a pin</h2>
+      <label>
+        <gmap-autocomplete
+          @place_changed="setPlace"
+        />
+        <button @click="addMarker">Add</button>
+      </label>
+      <br>
+    </div>
+    <br>
+    <gmap-map
+      :center="center"
+      :zoom="12"
+      style="width:100%;  height: 400px;"
+    >
+      <gmap-marker
+        v-for="(m, index) in markers"
+        :key="index"
+        :position="m.position"
+        @click="center=m.position"
+      />
+    </gmap-map>
+  </div>
 </template>
 
 <script>
-import gmapsInit from '~/utils/google-maps'
 
 export default {
-  name: 'Map',
-  async mounted() {
-    try {
-      const google = await gmapsInit()
-      const geocoder = new google.maps.Geocoder()
-      const map = new google.maps.Map(this.$el)
+  name: 'GoogleMap',
+  data() {
+    return {
+      // default to montreal to keep it simple
+      // change this to whatever makes sense
+      center: { lat: 45.508, lng: -73.587 },
+      markers: [],
+      places: [],
+      currentPlace: null
+    }
+  },
 
-      geocoder.geocode({ address: 'Austria' }, (results, status) => {
-        if (status !== 'OK' || !results[0]) {
-          throw new Error(status)
+  mounted() {
+    this.geolocate()
+  },
+
+  methods: {
+    setPlace(place) {
+      this.currentPlace = place
+    },
+    addMarker() {
+      if (this.currentPlace) {
+        const marker = {
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
         }
-
-        map.setCenter(results[0].geometry.location)
-        map.fitBounds(results[0].geometry.viewport)
+        this.markers.push({ position: marker })
+        this.places.push(this.currentPlace)
+        this.center = marker
+        this.currentPlace = null
+      }
+    },
+    geolocate: function () {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
       })
-    } catch (error) {
-      console.error(error)
     }
   }
 }
 </script>
 
 <style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  width: 100vw;
-  height: 100vh;
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

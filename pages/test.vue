@@ -1,84 +1,44 @@
 <template>
   <div>
-    <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete
-          @place_changed="setPlace"
-        />
-        <button @click="addMarker">Add</button>
-      </label>
-      <br>
-    </div>
-    <br>
-    <gmap-map
-      :center="center"
-      :zoom="12"
-      style="width:100%;  height: 400px;"
-    >
-      <gmap-marker
-        v-for="(m, index) in markers"
-        :key="index"
-        :position="m.position"
-        @click="center=m.position"
-      />
-    </gmap-map>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout child-flex>
+          <v-card>
+            <div class="row">
+              <div class="column left">
+                <reviewListFullComponent />
+              </div>
+              <div class="column right">
+                <GoogleMap />
+              </div>
+            </div>
+          </v-card>
+        </v-layout>
+      </v-container>
+    </v-content>
   </div>
 </template>
 
 <script>
 
+import reviewListFullComponent from '~/components/reviewListFullComponent.vue'
+import GoogleMap from '~/components/map.vue'
+
 export default {
-  name: 'GoogleMap',
+  layout: 'default',
+  components: {
+    reviewListFullComponent,
+    GoogleMap
+  },
   data() {
     return {
-      // defaults to Fredericksburg, VA
-      center: { lat: 38.303299, lng: -77.460663 },
-      markers: [],
-      places: [],
-      currentPlace: null
+      testVariable: false
     }
   },
-
-  mounted() {
-    this.geolocate()
-  },
-
   methods: {
-    setPlace(place) {
-      this.currentPlace = place
-    },
-    addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
-        }
-        this.markers.push({ position: marker })
-        this.places.push(this.currentPlace)
-        this.center = marker
-        this.currentPlace = null
-      }
-    },
-    geolocate: function () {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      })
+    exampleMethod(index) {
+      this.testVariable = false
     }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

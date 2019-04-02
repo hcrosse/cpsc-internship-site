@@ -9,6 +9,7 @@
       <v-toolbar-title v-text="title" />
 
       <v-spacer />
+
       <v-text-field
         class="search-bar"
         prepend-inner-icon="search"
@@ -18,6 +19,7 @@
         hide-details
         single-line
       />
+
       <v-spacer />
 
       <div v-if="adminLoggedIn==true">
@@ -62,7 +64,7 @@
             v-model="email"
             type="email"
             placeholder="Email"
-            pattern="[a-z0-9A-Z._%+-]+@mail.umw.edu"
+            pattern="[a-z0-9A-Z._%+-]+@*umw.edu"
             title="Must be a valid UMW email address ending in @mail.umw.edu"
           >
           <input
@@ -115,6 +117,7 @@ import { auth } from '~/plugins/firebase.js'
 export default {
   data() {
     return {
+      drawer: false,
       adminLoggedIn: false,
       userLoggedIn: false,
       placeholderVariable: false,
@@ -133,6 +136,16 @@ export default {
         this.adminLoggedIn = false
         this.userLoggedIn = true
       }
+      auth.signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
+        // Errors here
+        const errorCode = error.code
+        const errorMessage = error.message
+        if (errorCode === 'test') {
+          alert('test')
+        } else {
+          alert(errorMessage)
+        }
+      })
     },
     attemptLogout: function () {
       this.userLoggedIn = false
@@ -140,7 +153,16 @@ export default {
     },
     attemptRegister: function () {
       this.placeholderVariable = true
-      auth.createUserWithEmailAndPassword(this.email, this.password)
+      auth.createUserWithEmailAndPassword(this.email, this.password).catch(function (error) {
+        // Errors here
+        const errorCode = error.code
+        const errorMessage = error.message
+        if (errorCode === 'test') {
+          alert('test')
+        } else {
+          alert(errorMessage)
+        }
+      })
     },
     swapToAdminView: function () {
       /* make sure to validate/check for admin session token */

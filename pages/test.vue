@@ -32,9 +32,8 @@ export default {
   name: 'GoogleMap',
   data() {
     return {
-      // default to montreal to keep it simple
-      // change this to whatever makes sense
-      center: { lat: 45.508, lng: -73.587 },
+      // defaults to Fredericksburg, VA
+      center: { lat: 38.303299, lng: -77.460663 },
       markers: [],
       places: [],
       currentPlace: null

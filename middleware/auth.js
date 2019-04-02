@@ -1,11 +1,16 @@
 export default function ({ store, redirect, route }) {
-  if (store.getter.getUser != null && route.name === 'login') {
-    redirect('/')
-  } else if (store.getter.getUser == null && (isUserRoute(route) || isAdminRoute(route))) {
-    redirect('/login')
-  } else if (!store.getter.isAdmin() && isAdminRoute(route)) {
-    alert('poop')
-    redirect('/')
+  const getUser = store.getters.getUser
+  let isAdmin = null
+  if (getUser) {
+    isAdmin = store.getters.isAdmin
+  }
+
+  if (getUser && route.name === 'login') {
+    return redirect('/')
+  } else if (!getUser && (isUserRoute(route) || isAdminRoute(route))) {
+    return redirect('/login')
+  } else if (!isAdmin && isAdminRoute(route)) {
+    return redirect('/')
   }
 }
 

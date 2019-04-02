@@ -1,37 +1,93 @@
 <template>
   <div>
-    <h1>vue2-google-maps Example</h1>
-    <p>This example loads the Google Map through vue2-google-maps.</p>
-    <GmapMap
-      :center="{lat:10, lng:10}"
-      :zoom="7"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
-    />
+    <div>
+      <h2>Search and add a pin</h2>
+      <label>
+        <gmap-autocomplete
+          @place_changed="setPlace"
+        />
+        <button @click="addMarker">Add</button>
+      </label>
+      <br>
+    </div>
+    <br>
+    <gmap-map
+      :center="center"
+      :zoom="12"
+      style="width:100%;  height: 400px;"
+      :options="{
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: true,
+        disableDefaultUi: false
+      }"
+    >
+      <gmap-marker
+        v-for="(m, index) in markers"
+        :key="index"
+        :position="m.position"
+        @click="center=m.position"
+      />
+    </gmap-map>
   </div>
 </template>
 
-<style scoped>
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 400;
-  font-size: 100px;
-  color: #526488;
-  letter-spacing: 1px;
-  font-size: 6em;
-}
+<script>
 
-.subtitle {
-  font-weight: 300;
-  font-size: 3em;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+export default {
+  name: 'GoogleMap',
+  data() {
+    return {
+      // defaults to Fredericksburg, VA
+      center: { lat: 38.303299, lng: -77.460663 },
+      markers: [],
+      places: [],
+      currentPlace: null
+    }
+  },
 
-.links {
-  padding-top: 15px;
+  mounted() {
+    this.geolocate()
+  },
+
+  methods: {
+    setPlace(place) {
+      this.currentPlace = place
+    },
+    addMarker() {
+      if (this.currentPlace) {
+        const marker = {
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
+        }
+        this.markers.push({ position: marker })
+        this.places.push(this.currentPlace)
+        this.center = marker
+        this.currentPlace = null
+      }
+    },
+    geolocate: function () {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+      })
+    }
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

@@ -1,44 +1,35 @@
 <template>
   <v-app>
     <v-toolbar
-      color="primary"
+      color="#1A73E8"
       dark
       fixed
       app
     >
-      <v-toolbar-title v-text="title" />
-
-      <v-spacer />
-
-      <v-text-field
-        class="search-bar"
-        prepend-inner-icon="search"
-        label="Search"
-        solo-inverted
-        flat
-        hide-details
-        single-line
+      <v-toolbar-title
+        @click="home"
+        v-text="title"
       />
 
       <v-spacer />
 
-      <div v-if="adminLoggedIn==true">
-        <v-btn
-          flat
-          to="/admin"
-          @click="swapToAdminView()"
-        >
-          Admin Page
-        </v-btn>
-        <v-btn
-          flat
-          to="/"
-          @click="attemptLogout()"
-        >
-          Logout
-        </v-btn>
-      </div>
-      <div v-else-if="userLoggedIn==true">
+      <!--<div v-if="this.$store.user.">-->
+      <!--<v-btn-->
+      <!--flat-->
+      <!--to="/admin"-->
+      <!--@click="swapToAdminView()"-->
+      <!--&gt;-->
+      <!--Admin Page-->
+      <!--</v-btn>-->
+      <!--<v-btn-->
+      <!--flat-->
+      <!--to="/"-->
+      <!--@click="attemptLogout()"-->
+      <!--&gt;-->
+      <!--Logout-->
+      <!--</v-btn>-->
+      <!--</div>-->
+      <div v-if="this.$store.user">
         <v-btn
           flat
           to="/createreview"
@@ -56,43 +47,21 @@
         </v-btn>
       </div>
       <div v-else>
-        <!-- can use line below for the "info" symbol for providing login requirement info-->
-        <!-- only works if we import and npm install the font awesome image library-->
-        <i class="fas fa-info-circle" />
-        <form>
-          <input
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            pattern="[a-z0-9A-Z._%+-]+@*umw.edu"
-            title="Must be a valid UMW email address ending in @mail.umw.edu"
-          >
-          <input
-            v-model="password"
-            type="password"
-            placeholder="Password"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-          >
+        <v-btn
+          flat
+          outline="true"
+          to="/login"
+        >
+          Sign In
+        </v-btn>
 
-          <v-btn
-            flat
-            type="submit"
-            @click="attemptRegister()"
-          >
-            Register
-          </v-btn>
-
-          <v-btn
-            flat
-            type="submit"
-            @click="attemptLogin()"
-          >
-            Login
-          </v-btn>
-        </form>
-          <!-- /v-toolbar-items -->
-        </v-text-field>
+        <v-btn
+          flat
+          outline="true"
+          to="/register"
+        >
+          Register
+        </v-btn>
       </div>
     </v-toolbar>
 
@@ -112,7 +81,6 @@
 </template>
 
 <script>
-import { auth } from '~/plugins/firebase.js'
 
 export default {
   data() {
@@ -121,7 +89,7 @@ export default {
       adminLoggedIn: false,
       userLoggedIn: false,
       placeholderVariable: false,
-      title: 'UMW CPSC Internship Board',
+      title: 'CPSC Internship Site',
       fixed: false,
       email: '',
       password: ''
@@ -136,16 +104,6 @@ export default {
         this.adminLoggedIn = false
         this.userLoggedIn = true
       }
-      auth.signInWithEmailAndPassword(this.email, this.password).catch(function (error) {
-        // Errors here
-        const errorCode = error.code
-        const errorMessage = error.message
-        if (errorCode === 'test') {
-          alert('test')
-        } else {
-          alert(errorMessage)
-        }
-      })
     },
     attemptLogout: function () {
       this.userLoggedIn = false
@@ -153,16 +111,6 @@ export default {
     },
     attemptRegister: function () {
       this.placeholderVariable = true
-      auth.createUserWithEmailAndPassword(this.email, this.password).catch(function (error) {
-        // Errors here
-        const errorCode = error.code
-        const errorMessage = error.message
-        if (errorCode === 'test') {
-          alert('test')
-        } else {
-          alert(errorMessage)
-        }
-      })
     },
     swapToAdminView: function () {
       /* make sure to validate/check for admin session token */
@@ -170,13 +118,10 @@ export default {
     },
     navigateToReviewCreation: function () {
 
+    },
+    home: function () {
+      this.$router.push('/')
     }
   }
 }
 </script>
-
-<style>
-  .search-bar {
-    max-width: 50vw;
-  }
-</style>

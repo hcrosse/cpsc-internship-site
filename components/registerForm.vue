@@ -4,7 +4,7 @@
       <!-- logo goes here -->
 
       <p class="title small-space">
-        Sign in
+        Register
       </p>
 
       <v-form>
@@ -30,24 +30,20 @@
           outline
           :rules="[rules.required, rules.password]"
           @input="validate"
-          @keyup.enter="login"
+          @keyup.enter="register"
         />
 
-        <div class="small-space padded">
-          <a href="/reset" class="link">Forgot password?</a>
-        </div>
-
         <div class="big-space l-pad opposite">
-          <a href="/register" class="link small-space">Register</a>
+          <a href="/login" class="link small-space">Sign in</a>
 
           <v-btn
             v-if="valid"
             class="active-btn"
             flat
             right
-            @click="login"
+            @click="register"
           >
-            Sign in
+            Register
           </v-btn>
           <v-btn
             v-else
@@ -55,7 +51,7 @@
             right
             disabled
           >
-            Sign in
+            Register
           </v-btn>
         </div>
       </v-form>
@@ -64,6 +60,8 @@
 </template>
 
 <script>
+// import { auth } from '../plugins/firebase'
+
 export default {
   data() {
     return {
@@ -73,7 +71,7 @@ export default {
       rules: {
         required: value => !!value || 'Required',
         email: (value) => {
-          const pattern = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)|(^jenniferpolack@gmail.com$)/
+          const pattern = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)/
           return pattern.test(value) || 'Must be a valid UMW email'
         },
         password: (value) => {
@@ -83,52 +81,25 @@ export default {
       }
     }
   },
-  computed: {
-    currUser() {
-      return this.$store.getters.admin
-    },
-    currEmail() {
-      return this.$store.getters.email
-    },
-    currVerified() {
-      return this.$store.getters.verified
-    },
-    currAdmin() {
-      return this.$store.getters.admin
-    }
-  },
+
   methods: {
     validate: function () {
       // ugly bc I don't know better
-      const epat = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)|(^jenniferpolack@gmail.com$)/
+      const epat = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)/
       const ppat = /([\S]{8,})/
       this.valid = (epat.test(this.email) && ppat.test(this.password))
     },
-    login: function () {
+    register: function () {
       const em = this.email
       const pa = this.password
-      // const st = this.$store
-      // this.$store.dispatch('login', { em, pa }).then((user) => {
-      //   // alert('1')
-      //   // st.dispatch('set', user)
-      // }).catch(function (error) {
+      // this.$store.dispatch('register', { em, pa }).catch(function (error) {
       //   const errorCode = error.code
-      //   if (errorCode === 'auth/user-not-found') {
-      //     alert('User not found. Please register an account.')
-      //   } else if (errorCode === 'auth/wrong-password') {
-      //     alert('Invalid password.')
-      //   } else if (errorCode === 'auth/user-disabled') {
-      //     alert('Account disabled.')
+      //   if (errorCode === 'auth/email-already-in-use') {
+      //     alert('Email already in use. Please sign in.')
       //   }
       // })
-      // // alert(this.$store.state.user.email)
-      // if (this.$store.state.user && this.$store.state.verified) {
-      //   this.$router.push('/')
-      // } else if (this.$store.state.user && !this.$store.state.verified) {
-      //   this.$state.dispatch('resend')
-      //   this.$router.push('/verify')
-      // }
-      this.$store.dispatch('login', { em, pa })
+      // alert(this.$store.state.email)
+      this.$store.dispatch('register', { em, pa })
     }
   }
 }

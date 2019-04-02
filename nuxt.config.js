@@ -41,7 +41,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
-    '@/plugins/firebase.js'
+    '@/plugins/firebase.js',
+    '@/plugins/fireauth.js'
   ],
 
   /*
@@ -49,6 +50,10 @@ module.exports = {
   */
   modules: [
   ],
+
+  router: {
+    middleware: 'auth'
+  },
 
   /*
   ** Build configuration

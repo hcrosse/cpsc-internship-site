@@ -30,14 +30,6 @@ export default {
     reviewListFullComponent
   },
   data() {
-    return {
-      testVariable: false
-    }
-  },
-  methods: {
-    exampleMethod(index) {
-      this.testVariable = false
-    }
   }
 }
 </script>

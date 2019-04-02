@@ -22,7 +22,9 @@ export default {
     loginForm
   },
   data() {
-
+    return {
+      name: 'login'
+    }
   }
 }
 </script>

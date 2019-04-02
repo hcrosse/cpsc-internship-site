@@ -82,3 +82,6 @@ dist
 
 # Service worker
 sw.*
+
+# Account credentials
+polack-internship*.json

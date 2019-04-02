@@ -42,7 +42,9 @@ module.exports = {
   */
   plugins: [
 	{ src: '~/plugins/google-maps.js', ssr: true},
-	'~/plugins/vuetify.js'],
+	'@/plugins/vuetify.js',
+    	'@/plugins/firebase.js'
+  ],
 
   /*
   ** Nuxt.js modules

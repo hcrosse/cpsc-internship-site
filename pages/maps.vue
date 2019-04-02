@@ -43,7 +43,10 @@ export default {
     return {
       // defaults to Fredericksburg, VA
       center: { lat: 38.303299, lng: -77.460663 },
-      markers: [],
+      markers: [
+        { position: { lat: 38.303299, lng: -77.460663 } },
+        { position: { lat: 38.468369, lng: -77.440102 } },
+        { position: { lat: 38.336310, lng: -77.051540 } }],
       places: [],
       currentPlace: null
     }

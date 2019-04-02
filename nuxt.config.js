@@ -40,9 +40,9 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [ 
+  plugins: [
 	{ src: '~/plugins/google-maps.js', ssr: true},
-	'~/plugins/vuetify.js' ],
+	'~/plugins/vuetify.js'],
 
   /*
   ** Nuxt.js modules
@@ -55,7 +55,6 @@ module.exports = {
   */
   build: {
     transpile: ['vuetify/lib', /^vue2-google-maps($|\/)/],
-    //transpile: [/^vue2-google-maps($|\/)/],
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
       stylus: {

@@ -1,6 +1,30 @@
 <template>
   <div class="container">
     <div>
+      <v-alert
+        :value="alertUser"
+        type="error"
+      >
+        Please select an option from all dropdown menus, and select atleast one interview type
+      </v-alert>
+      <div class="row">
+        <div class="column prevPage">
+          <v-btn
+            style="width:100%"
+            @click="prevPage()"
+          >
+            Prev page
+          </v-btn>
+        </div>
+        <div class="column nextPage">
+          <v-btn
+            style="width:100%"
+            @click="nextPage()"
+          >
+            Next page
+          </v-btn>
+        </div>
+      </div>
       <h1>
         ABOUT THE JOB:
       </h1>
@@ -67,28 +91,28 @@
       <div class="mr-4 ml-4">
         <v-layout row wrap>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Python" value="gov" />
+            <v-checkbox v-model="selectedSkills" label="Python" value="python" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Java" value="edu" />
+            <v-checkbox v-model="selectedSkills" label="Java" value="java" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Javascript" value="web" />
+            <v-checkbox v-model="selectedSkills" label="Javascript" value="js" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="C++/C" value="app" />
+            <v-checkbox v-model="selectedSkills" label="C++/C" value="cpp" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Linux" value="software" />
+            <v-checkbox v-model="selectedSkills" label="Linux" value="linux" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Ruby" value="hardware" />
+            <v-checkbox v-model="selectedSkills" label="Ruby" value="ruby" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="PHP" value="it" />
+            <v-checkbox v-model="selectedSkills" label="PHP" value="php" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="C#" value="research" />
+            <v-checkbox v-model="selectedSkills" label="C#" value="csharp" />
           </v-flex>
         </v-layout>
       </div>
@@ -102,10 +126,39 @@ export default {
     return {
       menu: false,
       menu2: false,
+      possibleEnvironments: ['Open Office', 'Private Office', 'Cubicle', 'Lab', 'Remote Position', 'Other'],
       startdate: null,
       enddate: null,
-      possibleEnvironments: ['Open Office', 'Private Office', 'Cubicle', 'Lab', 'Remote Position', 'Other'],
-      selectedEnvironment: null
+      selectedEnvironment: null,
+      selectedSkills: [],
+      allFieldsFilledOut: false,
+      alertUser: false
+    }
+  },
+  methods: {
+    nextPage: function () {
+      this.validateThisPagesFields()
+
+      if (this.allFieldsFilledOut) {
+        this.$parent.pageNumber = 4
+      }
+    },
+    prevPage: function () {
+      this.$parent.pageNumber = 2
+    },
+    validateThisPagesFields: function () {
+      if (
+        (!this.startdate) ||
+        (!this.enddate) ||
+        (!this.selectedEnvironment) ||
+        (this.selectedSkills === undefined || this.selectedSkills.length === 0)
+      ) {
+        this.allFieldsFilledOut = false
+        this.alertUser = true
+      } else {
+        this.allFieldsFilledOut = true
+        this.alertUser = false
+      }
     }
   }
 }

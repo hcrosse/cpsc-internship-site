@@ -1,5 +1,29 @@
 <template>
   <div class="container">
+    <v-alert
+      :value="alertUser"
+      type="error"
+    >
+      Please select an option from all dropdown menus, and select atleast one interview type
+    </v-alert>
+    <div class="row">
+      <div class="column prevPage">
+        <v-btn
+          style="width:100%"
+          @click="prevPage()"
+        >
+          Prev page
+        </v-btn>
+      </div>
+      <div class="column nextPage">
+        <v-btn
+          style="width:100%"
+          :disabled="true"
+        >
+          Next page
+        </v-btn>
+      </div>
+    </div>
     <h1>
       YOUR OPINION:
     </h1>
@@ -26,9 +50,9 @@
     </v-layout>
     <v-btn
       style="width:100%"
-      :disabled="submissionDisabled"
+      :disabled="isDisabled"
       color="light-green"
-      @click="submitNewReview()"
+      @click="checkAndSubmit()"
     >
       Submit Review
     </v-btn>
@@ -42,12 +66,40 @@ export default {
       ratings: ['Very Good', 'Good', 'Average', 'Bad', 'Very Bad'],
       selectedRating: null,
       summary: null,
-      submissionDisabled: false
+      allFieldsFilledOut: false,
+      alertUser: false
+    }
+  },
+  computed: {
+    isDisabled() {
+      if (!this.summary || !this.selectedRating) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   methods: {
-    submitNewReview: function () {
-      /* submit data to database here */
+    prevPage: function () {
+      this.$parent.pageNumber = 3
+    },
+    validateThisPagesFields: function () {
+      if (
+        (!this.selectedRating) ||
+        (!this.summary)
+      ) {
+        this.allFieldsFilledOut = false
+        this.alertUser = true
+      } else {
+        this.allFieldsFilledOut = true
+        this.alertUser = false
+      }
+    },
+    checkAndSubmit: function () {
+      this.validateThisPagesFields()
+      if (this.allFieldsFilledOut) {
+        this.$parent.submitNewReview()
+      }
     }
   }
 }

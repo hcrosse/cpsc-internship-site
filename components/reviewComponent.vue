@@ -1,25 +1,5 @@
 <template>
   <div>
-    <div class="row">
-      <div class="column prevPage">
-        <v-btn
-          style="width:100%"
-          :disabled="prevDisabled"
-          @click="prevPage()"
-        >
-          Prev page
-        </v-btn>
-      </div>
-      <div class="column nextPage">
-        <v-btn
-          style="width:100%"
-          :disabled="nextDisabled"
-          @click="nextPage()"
-        >
-          Next page
-        </v-btn>
-      </div>
-    </div>
     <div v-if="pageNumber==1">
       <part1 />
     </div>
@@ -51,36 +31,10 @@ export default {
   },
   data() {
     return {
-      pageNumber: 1,
-      prevDisabled: true,
-      nextDisabled: false
+      pageNumber: 1
     }
   },
   methods: {
-    nextPage: function () {
-      if (this.pageNumber < 4) {
-        this.pageNumber++
-      }
-      this.evaluateButtons()
-    },
-    prevPage: function () {
-      if (this.pageNumber > 1) {
-        this.pageNumber--
-      }
-      this.evaluateButtons()
-    },
-    evaluateButtons: function () {
-      if (this.pageNumber <= 1) {
-        this.prevDisabled = true
-        this.nextDisabled = false
-      } else if (this.pageNumber >= 4) {
-        this.prevDisabled = false
-        this.nextDisabled = true
-      } else {
-        this.prevDisabled = false
-        this.nextDisabled = false
-      }
-    },
     submitNewReview: function () {
       /* make sure to validate login/session token */
     }

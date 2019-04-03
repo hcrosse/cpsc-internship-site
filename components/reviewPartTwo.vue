@@ -1,5 +1,29 @@
 <template>
   <div class="container">
+    <v-alert
+      :value="alertUser"
+      type="error"
+    >
+      Please select an option from all dropdown menus, and select atleast one interview type
+    </v-alert>
+    <div class="row">
+      <div class="column prevPage">
+        <v-btn
+          style="width:100%"
+          @click="prevPage()"
+        >
+          Prev page
+        </v-btn>
+      </div>
+      <div class="column nextPage">
+        <v-btn
+          style="width:100%"
+          @click="nextPage()"
+        >
+          Next page
+        </v-btn>
+      </div>
+    </div>
     <div>
       <h1>
         ABOUT THE INTERVIEW:
@@ -35,10 +59,37 @@ export default {
   data() {
     return {
       possibleLengths: ['< 1 month', '1-3 months', '3-6 months', '6+ months'],
-      selectedInterviewLength: null,
       possibleObtainments: ['Referral', 'Online Application', 'Job Fair', 'Other'],
+      selectedInterviewLength: null,
       selectedObtainment: null,
-      selectedInterviewFormats: []
+      selectedInterviewFormats: [],
+      allFieldsFilledOut: false,
+      alertUser: false
+    }
+  },
+  methods: {
+    nextPage: function () {
+      this.validateThisPagesFields()
+
+      if (this.allFieldsFilledOut) {
+        this.$parent.pageNumber = 3
+      }
+    },
+    prevPage: function () {
+      this.$parent.pageNumber = 1
+    },
+    validateThisPagesFields: function () {
+      if (
+        (!this.selectedInterviewLength) ||
+        (!this.selectedObtainment) ||
+        (this.selectedInterviewFormats === undefined || this.selectedInterviewFormats.length === 0)
+      ) {
+        this.allFieldsFilledOut = false
+        this.alertUser = true
+      } else {
+        this.allFieldsFilledOut = true
+        this.alertUser = false
+      }
     }
   }
 }

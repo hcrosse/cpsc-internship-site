@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       pageNumber: 1,
-      wasclicked: '',
 
       companyName: null,
       companyAddress: null,

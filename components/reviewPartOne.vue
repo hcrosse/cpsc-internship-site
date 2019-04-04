@@ -1,5 +1,29 @@
 <template>
   <div class="container">
+    <v-alert
+      :value="alertUser"
+      type="error"
+    >
+      Please fill out all fields and select atleast one industry
+    </v-alert>
+    <div class="row">
+      <div class="column prevPage">
+        <v-btn
+          style="width:100%"
+          :disabled="true"
+        >
+          Prev page
+        </v-btn>
+      </div>
+      <div class="column nextPage">
+        <v-btn
+          style="width:100%"
+          @click="nextPage()"
+        >
+          Next page
+        </v-btn>
+      </div>
+    </div>
     <div>
       <h1>
         ABOUT THE COMPANY:
@@ -55,7 +79,44 @@ export default {
     return {
       companyName: null,
       companyAddress: null,
-      selectedIndustrys: []
+      selectedIndustrys: [],
+      allFieldsFilledOut: false,
+      alertUser: false
+
+    }
+  },
+  beforeMount() {
+    this.companyName = this.$parent.companyName
+    this.companyAddress = this.$parent.companyAddress
+    this.selectedIndustrys = this.$parent.selectedIndustrys
+    // save parent data to itself and deal with it
+  },
+  methods: {
+    nextPage: function () {
+      this.validateThisPagesFields()
+
+      if (this.allFieldsFilledOut) {
+        this.updateParentData()
+        this.$parent.pageNumber = 2
+      }
+    },
+    updateParentData: function () {
+      this.$parent.companyName = this.companyName
+      this.$parent.companyAddress = this.companyAddress
+      this.$parent.selectedIndustrys = this.selectedIndustrys
+    },
+    validateThisPagesFields: function () {
+      if (
+        (!this.companyName) ||
+        (!this.companyAddress) ||
+        (this.selectedIndustrys === undefined || this.selectedIndustrys.length === 0)
+      ) {
+        this.allFieldsFilledOut = false
+        this.alertUser = true
+      } else {
+        this.allFieldsFilledOut = true
+        this.alertUser = false
+      }
     }
   }
 }

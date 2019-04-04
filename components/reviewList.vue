@@ -1,6 +1,10 @@
 <template>
   <div class="reviewList">
-    <v-list two-line>
+    <v-list
+      two-line
+      style="max-height: 525px"
+      class="scroll-y"
+    >
       <template v-for="(item, index) in items">
         <v-list-tile
           :key="item.title"
@@ -61,6 +65,31 @@ export default {
         {
           headline: 'Intern',
           title: 'Uber',
+          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
+        },
+        {
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
+          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
+        },
+        {
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
+          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
+        },
+        {
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
+          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
+        },
+        {
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
+          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
+        },
+        {
+          headline: 'Coffee Fetcher',
+          title: 'Capital One',
           subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
         },
         {

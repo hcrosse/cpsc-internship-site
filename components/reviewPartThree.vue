@@ -135,15 +135,30 @@ export default {
       alertUser: false
     }
   },
+  beforeMount() {
+    this.startdate = this.$parent.startdate
+    this.enddate = this.$parent.enddate
+    this.selectedEnvironment = this.$parent.selectedEnvironment
+    this.selectedSkills = this.$parent.selectedSkills
+    // save parent data to itself and deal with it
+  },
   methods: {
+    updateParentData: function () {
+      this.$parent.startdate = this.startdate
+      this.$parent.enddate = this.enddate
+      this.$parent.selectedEnvironment = this.selectedEnvironment
+      this.$parent.selectedSkills = this.selectedSkills
+    },
     nextPage: function () {
       this.validateThisPagesFields()
 
       if (this.allFieldsFilledOut) {
+        this.updateParentData()
         this.$parent.pageNumber = 4
       }
     },
     prevPage: function () {
+      this.updateParentData()
       this.$parent.pageNumber = 2
     },
     validateThisPagesFields: function () {

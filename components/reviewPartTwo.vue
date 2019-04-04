@@ -67,15 +67,28 @@ export default {
       alertUser: false
     }
   },
+  beforeMount() {
+    this.selectedInterviewLength = this.$parent.selectedInterviewLength
+    this.selectedObtainment = this.$parent.selectedObtainment
+    this.selectedInterviewFormats = this.$parent.selectedInterviewFormats
+    // save parent data to itself and deal with it
+  },
   methods: {
+    updateParentData: function () {
+      this.$parent.selectedInterviewLength = this.selectedInterviewLength
+      this.$parent.selectedObtainment = this.selectedObtainment
+      this.$parent.selectedInterviewFormats = this.selectedInterviewFormats
+    },
     nextPage: function () {
       this.validateThisPagesFields()
 
       if (this.allFieldsFilledOut) {
+        this.updateParentData()
         this.$parent.pageNumber = 3
       }
     },
     prevPage: function () {
+      this.updateParentData()
       this.$parent.pageNumber = 1
     },
     validateThisPagesFields: function () {

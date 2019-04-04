@@ -85,13 +85,25 @@ export default {
 
     }
   },
+  beforeMount() {
+    this.companyName = this.$parent.companyName
+    this.companyAddress = this.$parent.companyAddress
+    this.selectedIndustrys = this.$parent.selectedIndustrys
+    // save parent data to itself and deal with it
+  },
   methods: {
     nextPage: function () {
       this.validateThisPagesFields()
 
       if (this.allFieldsFilledOut) {
+        this.updateParentData()
         this.$parent.pageNumber = 2
       }
+    },
+    updateParentData: function () {
+      this.$parent.companyName = this.companyName
+      this.$parent.companyAddress = this.companyAddress
+      this.$parent.selectedIndustrys = this.selectedIndustrys
     },
     validateThisPagesFields: function () {
       if (

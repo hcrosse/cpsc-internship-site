@@ -79,8 +79,18 @@ export default {
       }
     }
   },
+  beforeMount() {
+    this.selectedRating = this.$parent.selectedRating
+    this.summary = this.$parent.summary
+    // save parent data to itself and deal with it
+  },
   methods: {
+    updateParentData: function () {
+      this.$parent.selectedRating = this.selectedRating
+      this.$parent.summary = this.summary
+    },
     prevPage: function () {
+      this.updateParentData()
       this.$parent.pageNumber = 3
     },
     validateThisPagesFields: function () {
@@ -98,6 +108,7 @@ export default {
     checkAndSubmit: function () {
       this.validateThisPagesFields()
       if (this.allFieldsFilledOut) {
+        this.updateParentData()
         this.$parent.submitNewReview()
       }
     }

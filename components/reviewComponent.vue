@@ -31,7 +31,24 @@ export default {
   },
   data() {
     return {
-      pageNumber: 1
+      pageNumber: 1,
+      wasclicked: '',
+
+      companyName: null,
+      companyAddress: null,
+      selectedIndustrys: [],
+
+      selectedInterviewLength: null,
+      selectedObtainment: null,
+      selectedInterviewFormats: [],
+
+      startdate: null,
+      enddate: null,
+      selectedEnvironment: null,
+      selectedSkills: [],
+
+      selectedRating: null,
+      summary: null
     }
   },
   methods: {

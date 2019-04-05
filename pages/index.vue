@@ -30,6 +30,16 @@ export default {
     reviewListFullComponent
   },
   data() {
+  },
+  // Fetch currently does not work correctly
+  fetch({ store }) {
+    if (store.getters.isAdmin) {
+      console.error('admin')
+    } else if (store.state.user) {
+      console.error('user')
+    } else {
+      console.error('none')
+    }
   }
 }
 </script>

@@ -5,65 +5,8 @@ import { auth } from '../plugins/firebase'
 
 Vue.use(Vuex)
 
-const createStore = () => {
+const store = () => {
   return new Vuex.Store({
-    // state: {
-    //   user: null,
-    //   email: 'fred',
-    //   verified: false,
-    //   admin: false
-    // },
-    // getters: {
-    //   user: state => state.user,
-    //   email: state => state.email,
-    //   verified: state => state.verified,
-    //   admin: state => state.admin
-    // },
-    // mutations: {
-    //   init(state, payload) {
-    //     if (payload) {
-    //       state.user = payload
-    //       state.email = payload.email
-    //       state.verified = payload.emailVerified
-    //       state.admin = this.email.match(/(jenniferpolack@gmail.com)|(hcrosse@mail.umw.edu)/)
-    //     } else {
-    //       state.user = null
-    //       state.email = 'potato'
-    //       state.verified = false
-    //       state.admin = false
-    //     }
-    //   }
-    // },
-    // actions: {
-    //   login({ commit }, payload) {
-    //     const { em, pa } = payload
-    //     // return auth.signInWithEmailAndPassword(em, pa)
-    //     return new Promise((resolve, reject) => {
-    //       auth.signInWithEmailAndPassword(em, pa).then((response) => {
-    //         resolve(response)
-    //       }).catch((error) => {
-    //         reject(error)
-    //       })
-    //     })
-    //   },
-    //
-    //   register: function ({ commit }, payload) {
-    //     const { em, pa } = payload
-    //     return auth.createUserWithEmailAndPassword(em, pa).then((user) => {
-    //       commit('init', user)
-    //     })
-    //   },
-    //
-    //   logout({ commit }) {
-    //     auth.signOut().then(() => {
-    //       commit('init', null)
-    //     }).catch(err => alert(err.message))
-    //   },
-    //
-    //   set({ commit }, payload) {
-    //     commit('init', payload)
-    //   }
-    // }
     state: {
       user: null
     },
@@ -123,10 +66,14 @@ const createStore = () => {
         return state.user.emailVerified
       },
       isAdmin(state) {
-        return state.user.email.match(/(jenniferpolack@gmail.com)|(hcrosse@mail.umw.edu)/)
+        if (state.user) {
+          return state.user.email.match(/(jenniferpolack@gmail.com)|(hcrosse@mail.umw.edu)/)
+        } else {
+          return false
+        }
       }
     }
   })
 }
 
-export default createStore
+export default store

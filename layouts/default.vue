@@ -13,6 +13,7 @@
 
       <v-spacer />
 
+      <!--This whole part needs work -->
       <!--<div v-if="this.$store.user.">-->
       <!--<v-btn-->
       <!--flat-->

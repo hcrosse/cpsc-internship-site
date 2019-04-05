@@ -27,9 +27,9 @@ export default {
     }
   },
   // Fetch currently does not work correctly
-  fetch({ store, redirect, route }) {
+  fetch({ store, redirect }) {
     if (store.state.user) {
-      return redirect('/' && route.path.match(/\/register/))
+      return redirect('/')
     }
   }
 }

@@ -20,7 +20,7 @@ export default {
   },
   // Fetch currently does not work correctly
   fetch({ store, redirect, route }) {
-    if (!store.state.user && route.path.match(/\/submit/)) {
+    if (!store.state.user) {
       return redirect('/')
     }
   }

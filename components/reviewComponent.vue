@@ -21,7 +21,7 @@ import part2 from '~/components/reviewPartTwo.vue'
 import part3 from '~/components/reviewPartThree.vue'
 import part4 from '~/components/reviewPartFour.vue'
 
-import firebase from 'firebase'
+import { db } from '../plugins/firebase.js'
 
 export default {
   layout: 'default',
@@ -55,7 +55,6 @@ export default {
   methods: {
     submitNewReview: function () {
       /* make sure to validate login/session token */
-      const db = firebase.firestore()
       db.collection('reviews').add({
         companyname: this.companyName,
         companyAddress: this.companyAddress,
@@ -68,7 +67,8 @@ export default {
         selectedEnvironment: this.selectedEnvironment,
         selectedSkills: this.selectedSkills,
         selectedRating: this.selectedRating,
-        summary: this.summary
+        summary: this.summary,
+        approvedByAdmin: 'pending'
       })
     }
   }

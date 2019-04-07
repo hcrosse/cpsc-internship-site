@@ -11,77 +11,77 @@
           {{ companyName }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div>
         <p><b>Company Address:</b></p>
         <p style="text-align: center">
           {{ companyAddress }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>Relevant Industrys:</b></p>
         <p style="text-align: center">
           {{ selectedIndustrys }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div>
         <p><b>Interview Length:</b></p>
         <p style="text-align: center">
           {{ selectedInterviewLength }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>How interview was obtained:</b></p>
         <p style="text-align: center">
           {{ selectedObtainment }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div>
         <p><b>Interview types I recieved:</b></p>
         <p style="text-align: center">
           {{ selectedInterviewFormats }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>Dates worked:</b></p>
         <p style="text-align: center">
           {{ startdate }}   <b><i> ...to... </i></b>   {{ enddate }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div>
         <p><b>Work Environment:</b></p>
         <p style="text-align: center">
           {{ selectedEnvironment }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>Skills utilitzed:</b></p>
         <p style="text-align: center">
           {{ selectedSkills }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div>
         <p><b>My rating of the company:</b> </p>
         <p style="text-align: center">
           {{ selectedRating }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>Summary of my experience:</b> </p>
         <p style="text-align: center">
           {{ summary }}
         </p>
       </div>
-      <hr>
+      <hr class="singleReviewBreak">
     </div>
     <div style="text-align: center">
       <v-btn
@@ -133,7 +133,7 @@ export default {
 }
 </script>
 <style>
-hr {
+.singleReviewBreak {
     display: block;
     height: 1px;
     border: 0;

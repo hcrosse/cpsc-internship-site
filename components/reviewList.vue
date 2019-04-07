@@ -1,27 +1,28 @@
 <template>
   <div class="reviewList">
+    <p>{{ testVar }}</p>
     <v-list
       two-line
       style="max-height: 525px"
       class="scroll-y"
     >
-      <template v-for="(item, index) in items">
+      <template v-for="(review, index) in firestoreReviewsQuery">
         <v-list-tile
-          :key="item.title"
+          :key="review.companyname"
           avatar
           ripple
           @click="openReview(index)"
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ review.companyname }}</v-list-tile-title>
             <v-list-tile-sub-title class="text--primary">
-              {{ item.headline }}
+              {{ review.companyAddress }}
             </v-list-tile-sub-title>
-            <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ review.summary }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-divider
-          v-if="index + 1 < items.length"
+          v-if="index + 1 < firestoreReviewsQuery.length"
           :key="index"
         />
       </template>
@@ -31,74 +32,31 @@
 
 <script>
 
+import { db } from '../plugins/firebase.js'
+
 export default {
   data() {
     return {
       reviewOpened: true,
+      testVar: 'nothing',
       selected: [2],
-      items: [
-        {
-          headline: 'Engineering Intern',
-          title: 'Google',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Software Team Intern',
-          title: 'Apple',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Student Researcher',
-          title: 'Facebook',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'IT Intern',
-          title: 'Amazon',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Summer Engineering Intern',
-          title: 'NASA',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Intern',
-          title: 'Uber',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        },
-        {
-          headline: 'Coffee Fetcher',
-          title: 'Capital One',
-          subtitle: 'Details for job sentence 1. Details for job sentence 2. Details for job sentence 3.'
-        }
-      ]
+      firestoreReviewsQuery: []
     }
+  },
+  beforeMount() {
+    // this.selectedRating = this.$parent.selectedRating
+    // this.summary = this.$parent.summary
+    // const startIndex = 0
+    // this.testVar = 'test sentence'
+    const self = this
+    db.collection('reviews').where('approvedByAdmin', '==', 'pending')
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          self.testVar = 'thisworked'
+          self.firestoreReviewsQuery.push(doc.data())
+        })
+      })
   },
   methods: {
     openReview(index) {

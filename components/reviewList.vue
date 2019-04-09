@@ -32,31 +32,14 @@
 
 <script>
 
-import { db } from '../plugins/firebase.js'
-
 export default {
   data() {
     return {
       reviewOpened: true,
       testVar: 'nothing',
       selected: [2],
-      firestoreReviewsQuery: []
+      firestoreReviewsQuery: this.$parent.firestoreReviewsQuery
     }
-  },
-  beforeMount() {
-    // this.selectedRating = this.$parent.selectedRating
-    // this.summary = this.$parent.summary
-    // const startIndex = 0
-    // this.testVar = 'test sentence'
-    const self = this
-    db.collection('reviews').where('approvedByAdmin', '==', 'pending')
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          self.testVar = 'thisworked'
-          self.firestoreReviewsQuery.push(doc.data())
-        })
-      })
   },
   methods: {
     openReview(index) {

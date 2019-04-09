@@ -102,22 +102,25 @@ export default {
       selected: [2],
       reviewIndexClicked: this.$parent.reviewIndexClicked,
 
-      companyName: 'Google',
-      companyAddress: '123 Fake Street, Fredericksburg VA, 22407',
-      selectedIndustrys: ['Web Development', 'Software Development'],
+      companyName: '',
+      companyAddress: '',
+      selectedIndustrys: [],
 
-      selectedInterviewLength: '1-3 months',
-      selectedObtainment: 'Online Application',
-      selectedInterviewFormats: ['Phone interview', 'In Person Interview'],
+      selectedInterviewLength: '',
+      selectedObtainment: '',
+      selectedInterviewFormats: [],
 
-      startdate: '01-01-1901',
-      enddate: '01-01-1901',
-      selectedEnvironment: 'Open Office',
-      selectedSkills: ['Java', 'C++'],
+      startdate: '',
+      enddate: '',
+      selectedEnvironment: '',
+      selectedSkills: [''],
 
-      selectedRating: 'Very Bad',
-      summary: 'Something something something, Googles spying on me.  Something something something, my cat is up a tree.  Something something something, Google makes bad ice tea.  Something something something, I badly hurt my knee.'
+      selectedRating: '',
+      summary: ''
     }
+  },
+  beforeMount() {
+    this.setVariables()
   },
   methods: {
     goBack(index) {
@@ -128,6 +131,23 @@ export default {
       // Current variables are preset just for testing
       // Make sure all variables in the data/return section......
       // .... are set to null by default first
+
+      this.companyName = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyname
+
+      this.companyAddress = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyAddress
+      this.selectedIndustrys = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedIndustrys
+
+      this.selectedInterviewLength = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedInterviewLength
+      this.selectedObtainment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedObtainment
+      this.selectedInterviewFormats = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedInterviewFormats
+
+      this.startdate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].startdate
+      this.enddate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].enddate
+      this.selectedEnvironment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedEnvironment
+      this.selectedSkills = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedSkills
+
+      this.selectedRating = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedRating
+      this.summary = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].summary
     }
   }
 }

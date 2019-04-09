@@ -110,6 +110,7 @@ export default {
       if (this.allFieldsFilledOut) {
         this.updateParentData()
         this.$parent.submitNewReview()
+        // adding this comment because this file dissapeared from my git stage
       }
     }
   }

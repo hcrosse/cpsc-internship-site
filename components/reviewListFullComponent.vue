@@ -17,6 +17,7 @@
 
 import singleReview from '~/components/singleReview.vue'
 import reviewList from '~/components/reviewList.vue'
+import { db } from '../plugins/firebase.js'
 
 export default {
   layout: 'default',
@@ -27,8 +28,20 @@ export default {
   data() {
     return {
       reviewOpened: false,
-      reviewIndexClicked: -1
+      reviewIndexClicked: -1,
+      firestoreReviewsQuery: []
     }
+  },
+  beforeMount() {
+    const self = this
+    db.collection('reviews').where('approvedByAdmin', '==', 'pending')
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          self.testVar = 'thisworked'
+          self.firestoreReviewsQuery.push(doc.data())
+        })
+      })
   },
   methods: {
     openReview(index) {

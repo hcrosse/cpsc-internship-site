@@ -4,7 +4,6 @@
       style="max-height: 477px"
       class="scroll-y"
     >
-      <p>REVIEW LIST INDEX CLICKED: {{ reviewIndexClicked }}</p>
       <div class="greyDiv">
         <p><b>Company Name:</b> </p>
         <p style="text-align: center">
@@ -127,11 +126,6 @@ export default {
       this.$parent.reviewOpened = false
     },
     setVariables(index) {
-      // Set all local variables for displaying review here
-      // Current variables are preset just for testing
-      // Make sure all variables in the data/return section......
-      // .... are set to null by default first
-
       this.companyName = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyname
 
       this.companyAddress = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyAddress

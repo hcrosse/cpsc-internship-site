@@ -1,6 +1,5 @@
 <template>
   <div class="reviewList">
-    <p>{{ testVar }}</p>
     <v-list
       two-line
       style="max-height: 525px"
@@ -36,7 +35,6 @@ export default {
   data() {
     return {
       reviewOpened: true,
-      testVar: 'nothing',
       selected: [2],
       firestoreReviewsQuery: this.$parent.firestoreReviewsQuery
     }

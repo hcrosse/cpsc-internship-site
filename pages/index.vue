@@ -6,7 +6,7 @@
           <v-card>
             <div class="row">
               <div class="column left">
-                <reviewListFullComponent :review-status="reviewStatus" />
+                <reviewListFullComponent review-status="rejected" />
               </div>
               <div class="column right">
                 <GoogleMap />
@@ -32,8 +32,7 @@ export default {
   },
   data() {
     return {
-      testVariable: false,
-      reviewStatus: 'pending'
+      testVariable: false
     }
   },
   methods: {

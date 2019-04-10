@@ -25,6 +25,12 @@ export default {
     singleReview,
     reviewList
   },
+  props: {
+    reviewStatus: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       reviewOpened: false,
@@ -34,11 +40,10 @@ export default {
   },
   beforeMount() {
     const self = this
-    db.collection('reviews').where('approvedByAdmin', '==', 'pending')
+    db.collection('reviews').where('approvedByAdmin', '==', this.reviewStatus)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          self.testVar = 'thisworked'
           self.firestoreReviewsQuery.push(doc.data())
         })
       })
@@ -50,15 +55,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.row {
-  content: "";
-  display: table;
-  clear: both;
-}
-.column {
-  float: left;
-  width: 50%;
-}
-</style>

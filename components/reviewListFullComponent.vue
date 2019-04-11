@@ -44,13 +44,17 @@ export default {
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          self.firestoreReviewsQuery.push(doc.data())
+          const review = {
+            data: doc.data(),
+            id: doc.id
+          }
+          self.firestoreReviewsQuery.push(review)
         })
       })
   },
   methods: {
-    openReview(index) {
-      this.reviewOpened = true
+    passIdToGrandParent() {
+
     }
   }
 }

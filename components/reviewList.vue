@@ -7,17 +7,17 @@
     >
       <template v-for="(review, index) in firestoreReviewsQuery">
         <v-list-tile
-          :key="review.companyname"
+          :key="review.data.companyname"
           avatar
           ripple
           @click="openReview(index)"
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ review.companyname }}</v-list-tile-title>
+            <v-list-tile-title>{{ review.data.companyname }}</v-list-tile-title>
             <v-list-tile-sub-title class="text--primary">
-              {{ review.companyAddress }}
+              {{ review.data.companyAddress }}
             </v-list-tile-sub-title>
-            <v-list-tile-sub-title>{{ review.summary }}</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ review.data.summary }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-divider
@@ -34,15 +34,16 @@
 export default {
   data() {
     return {
-      reviewOpened: true,
       selected: [2],
       firestoreReviewsQuery: this.$parent.firestoreReviewsQuery
     }
   },
   methods: {
     openReview(index) {
-      this.$parent.reviewOpened = true
+      // eslint-disable-next-line no-console
+      console.log(this.firestoreReviewsQuery[index].id)
       this.$parent.reviewIndexClicked = index
+      this.$parent.reviewOpened = true
     }
   }
 }

@@ -122,26 +122,26 @@ export default {
     this.setVariables()
   },
   methods: {
-    goBack(index) {
+    goBack() {
       this.$parent.reviewOpened = false
     },
-    setVariables(index) {
-      this.companyName = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyname
+    setVariables() {
+      this.companyName = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.companyname
 
-      this.companyAddress = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].companyAddress
-      this.selectedIndustrys = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedIndustrys
+      this.companyAddress = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.companyAddress
+      this.selectedIndustrys = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedIndustrys
 
-      this.selectedInterviewLength = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedInterviewLength
-      this.selectedObtainment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedObtainment
-      this.selectedInterviewFormats = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedInterviewFormats
+      this.selectedInterviewLength = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedInterviewLength
+      this.selectedObtainment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedObtainment
+      this.selectedInterviewFormats = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedInterviewFormats
 
-      this.startdate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].startdate
-      this.enddate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].enddate
-      this.selectedEnvironment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedEnvironment
-      this.selectedSkills = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedSkills
+      this.startdate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.startdate
+      this.enddate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.enddate
+      this.selectedEnvironment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedEnvironment
+      this.selectedSkills = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedSkills
 
-      this.selectedRating = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].selectedRating
-      this.summary = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].summary
+      this.selectedRating = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedRating
+      this.summary = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.summary
     }
   }
 }

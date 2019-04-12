@@ -100,6 +100,7 @@ export default {
       reviewOpened: true,
       selected: [2],
       reviewIndexClicked: this.$parent.reviewIndexClicked,
+      theReview: null,
 
       companyName: '',
       companyAddress: '',
@@ -126,22 +127,23 @@ export default {
       this.$parent.reviewOpened = false
     },
     setVariables() {
-      this.companyName = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.companyname
+      this.theReview = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked]
+      this.companyName = this.theReview.data.companyname
 
-      this.companyAddress = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.companyAddress
-      this.selectedIndustrys = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedIndustrys
+      this.companyAddress = this.theReview.data.companyAddress
+      this.selectedIndustrys = this.theReview.data.selectedIndustrys
 
-      this.selectedInterviewLength = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedInterviewLength
-      this.selectedObtainment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedObtainment
-      this.selectedInterviewFormats = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedInterviewFormats
+      this.selectedInterviewLength = this.theReview.data.selectedInterviewLength
+      this.selectedObtainment = this.theReview.data.selectedObtainment
+      this.selectedInterviewFormats = this.theReview.data.selectedInterviewFormats
 
-      this.startdate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.startdate
-      this.enddate = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.enddate
-      this.selectedEnvironment = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedEnvironment
-      this.selectedSkills = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedSkills
+      this.startdate = this.theReview.data.startdate
+      this.enddate = this.theReview.data.enddate
+      this.selectedEnvironment = this.theReview.data.selectedEnvironment
+      this.selectedSkills = this.theReview.data.selectedSkills
 
-      this.selectedRating = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.selectedRating
-      this.summary = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked].data.summary
+      this.selectedRating = this.theReview.data.selectedRating
+      this.summary = this.theReview.data.summary
     }
   }
 }

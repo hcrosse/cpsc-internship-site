@@ -6,7 +6,7 @@
           <v-card>
             <div class="row">
               <div class="column left">
-                <reviewListFullComponent />
+                <reviewListFullComponent review-status="approved" />
               </div>
               <div class="column right">
                 <GoogleMap />

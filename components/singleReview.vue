@@ -128,8 +128,8 @@ export default {
     },
     setVariables() {
       this.theReview = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked]
-      this.companyName = this.theReview.data.companyname
 
+      this.companyName = this.theReview.data.companyname
       this.companyAddress = this.theReview.data.companyAddress
       this.selectedIndustrys = this.theReview.data.selectedIndustrys
 

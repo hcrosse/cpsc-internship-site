@@ -40,11 +40,13 @@ export default {
   },
   methods: {
     openReview(index) {
-      this.$parent.passDataToGrandParent()
       // eslint-disable-next-line no-console
       console.log(this.firestoreReviewsQuery[index].id)
       this.$parent.reviewIndexClicked = index
       this.$parent.reviewOpened = true
+    },
+    updateList() {
+      this.firestoreReviewsQuery = this.$parent.firestoreReviewsQuery
     }
   }
 }

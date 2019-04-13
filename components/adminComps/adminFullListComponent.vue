@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <transition name="component-fade" mode="out-in">
-        <reviewList />
+        <reviewList ref="theListComponent" />
       </transition>
     </div>
   </div>
@@ -43,8 +43,10 @@ export default {
   },
   methods: {
     renewLists() {
-      const self = this
+      // eslint-disable-next-line no-console
+      console.log('in renewLists')
 
+      const self = this
       self.firestoreReviewsQuery = []
 
       db.collection('reviews').where('approvedByAdmin', '==', this.reviewStatus)
@@ -57,20 +59,11 @@ export default {
             }
             self.firestoreReviewsQuery.push(review) // had self
           })
+          self.$refs.theListComponent.updateList()
         })
     },
-    passDataToGrandParent() {
-      /*
-      if (this.reviewStatus === 'pending') {
-      // eslint-disable-next-line no-console
-        console.log('in pending')
-        // this.$parent.pendingFirestoreReviewsQuery = this.firestoreReviewsQuery
-      } else if (this.reviewStatus === 'rejected') {
-      // eslint-disable-next-line no-console
-        console.log('in rejected')
-      // self.$parent.rejectedFirestoreReviewsQuery = self.firestoreReviewsQuery
-      }
-      */
+    tellParentToUpdate() {
+      this.$emit('message', 'child component mounted (emitted)')
     }
   }
 }

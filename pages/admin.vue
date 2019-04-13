@@ -5,12 +5,22 @@
         <v-card>
           <div class="row">
             <div class="column pendingList">
-              <p>REVIEWS WAITING FOR APPROVAL</p>
-              <reviewListFullComponent review-status="pending" />
+              <p class="listTitlePtag">
+                REVIEWS WAITING FOR APPROVAL
+              </p>
+              <reviewListFullComponent :key="updateComponentsKey" ref="pendingComponent" review-status="pending" @message="updateAllComponents" />
             </div>
             <div class="column rejectedList">
-              <p>PREVIOUSLY REJECTED REVIEWS</p>
-              <reviewListFullComponent review-status="rejected" />
+              <p class="listTitlePtag">
+                PREVIOUSLY REJECTED REVIEWS
+              </p>
+              <reviewListFullComponent :key="updateComponentsKey" ref="rejectedComponent" review-status="rejected" @message="updateAllComponents" />
+            </div>
+            <div class="column approvedList">
+              <p class="listTitlePtag">
+                PREVIOUSLY APPROVED REVIEWS
+              </p>
+              <reviewListFullComponent :key="updateComponentsKey" ref="approvedComponent" review-status="approved" @message="updateAllComponents" />
             </div>
           </div>
         </v-card>
@@ -30,13 +40,15 @@ export default {
   },
   data() {
     return {
-      testvar: 'testvar text here'
+      testvar: 'testvar text here',
+      updateComponentsKey: 1
     }
   },
   methods: {
-    test: function () {
+    updateAllComponents: function () {
       // eslint-disable-next-line no-console
-      console.log('admin test function called, testvar text = ' + this.testvar)
+      console.log('in adminpage updateAllComponents method')
+      this.updateComponentsKey = this.updateComponentsKey + 1
     }
   }
 }
@@ -44,19 +56,23 @@ export default {
 
 <style>
 
+.listTitlePtag {
+
+}
+
 .pendingList {
-  width: 50%;
-  border: 5px solid black;
+  width: 33%;
+  border: 5px solid yellow;
 }
 
 .rejectedList {
-  width: 50%;
+  width: 33%;
   border: 5px solid red;
 }
 
 .approvedList {
-  width: 50%;
-  border: 5px solid red;
+  width: 33%;
+  border: 5px solid green;
 }
 
 </style>

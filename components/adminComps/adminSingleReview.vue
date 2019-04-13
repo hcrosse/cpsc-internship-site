@@ -84,19 +84,22 @@
     </div>
     <div style="text-align: center">
       <v-btn
-        v-if="this.$parent.reviewStatus === 'pending'"
-        color="red"
-        @click="rejectReview()"
-      >
-        REJECT
-      </v-btn>
-      <v-btn
         color="yellow"
         @click="editReview()"
       >
         EDIT
       </v-btn>
+
       <v-btn
+        v-if="this.$parent.reviewStatus === 'pending' || this.$parent.reviewStatus === 'approved'"
+        color="red"
+        @click="rejectReview()"
+      >
+        REJECT
+      </v-btn>
+
+      <v-btn
+        v-if="this.$parent.reviewStatus === 'pending' || this.$parent.reviewStatus === 'rejected'"
         color="light-green"
         @click="approveReview()"
       >
@@ -147,7 +150,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$parent.renewLists()
+      this.$parent.tellParentToUpdate()
       this.$parent.reviewOpened = false
     },
     rejectReview() {

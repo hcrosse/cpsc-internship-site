@@ -150,20 +150,19 @@ export default {
   },
   methods: {
     goBack() {
-      this.$parent.tellParentToUpdate()
       this.$parent.reviewOpened = false
     },
     rejectReview() {
       this.updateReviewInDatabase('rejected')
-      this.goBack()
+      this.$parent.tellParentToUpdate()
     },
     approveReview() {
       this.updateReviewInDatabase('approved')
-      this.goBack()
+      this.$parent.tellParentToUpdate()
     },
     editReview() {
       this.updateReviewInDatabase('pending')
-      this.goBack()
+      this.$parent.tellParentToUpdate()
     },
     updateReviewInDatabase(newStatus) {
       const reviewReference = db.collection('reviews').doc(this.theReview.id)

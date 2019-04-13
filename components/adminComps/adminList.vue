@@ -2,7 +2,7 @@
   <div class="reviewList">
     <v-list
       two-line
-      style="max-height: 525px"
+      style="max-height: 573px; min-height: 573px"
       class="scroll-y"
     >
       <template v-for="(review, index) in firestoreReviewsQuery">

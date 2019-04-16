@@ -2,7 +2,7 @@
   <div>
     <div>
       <v-btn
-        @click="testMethod()"
+        @click="findPositionByDocId()"
       >
         Test
       </v-btn>
@@ -10,6 +10,7 @@
     </div>
     <br>
     <gmap-map
+      ref="mapRef"
       :center="center"
       :zoom="12"
       style="width:100%;  height: 400px;"
@@ -53,27 +54,53 @@ export default {
     }
   },
   beforeMount() {
-    const self = this
-    db.collection('reviews').where('approvedByAdmin', '==', 'approved')
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          const review = {
-            position: { lat: doc.data().lat, lng: doc.data().long },
-            id: doc.id
-          }
-          self.firestoreReviewsQuery.push(review)
-          self.markers.push({ position: review.position })
-          // this.places.push(this.currentPlace)
-          // eslint-disable-next-line no-console
-          // console.log(review)
-        })
-      })
+    this.refreshMap()
   },
   methods: {
     testMethod() {
       // eslint-disable-next-line no-console
       console.log(this.firestoreReviewsQuery[0].position)
+    },
+    refreshMap() {
+      const self = this
+      db.collection('reviews').where('approvedByAdmin', '==', 'approved')
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            const review = {
+              position: { lat: doc.data().lat, lng: doc.data().long },
+              id: doc.id
+            }
+            self.firestoreReviewsQuery.push(review)
+            self.markers.push({ position: review.position })
+          // this.places.push(this.currentPlace)
+          // eslint-disable-next-line no-console
+          // console.log(review)
+          })
+        })
+    },
+    findPositionByDocId() {
+      const docId = 'V3AconCzFXOrOLrL8tVf'
+      for (let index = 0; index < this.firestoreReviewsQuery.length; ++index) {
+        if (this.firestoreReviewsQuery[index].id === docId) {
+          this.panToMarker(this.firestoreReviewsQuery[index].position)
+        }
+      }
+      /*
+      for each (review in this.firestoreReviewsQuery) {
+        if (review.data().id == docId) {
+          this.panToMarker(review.position)
+        }
+      }
+      */
+    },
+    panToMarker(marker) {
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        map.setZoom(12)
+        map.panTo(marker)
+      })
+
+      // this.$refs.mapRef.setCenter(this.firestoreReviewsQuery[0].position)
     }
   }
 }

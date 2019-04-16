@@ -53,12 +53,14 @@ const store = () => {
           commit('setUser', null)
           this.$router.push('/')
         })
+      },
+
+      updateUser(state, { user }) {
+        Vue.set(state, 'user', user)
       }
     },
     getters: {
-      getUser(state) {
-        return state.user
-      },
+      user: state => state.user,
       getEmail(state) {
         return state.user.email
       },

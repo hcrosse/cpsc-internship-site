@@ -50,6 +50,10 @@ module.exports = {
   modules: [
   ],
 
+  router: {
+    middleware: 'router-auth'
+  },
+
   /*
   ** Build configuration
   */

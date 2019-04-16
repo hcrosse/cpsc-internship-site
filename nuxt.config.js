@@ -48,10 +48,14 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
 
-  router: {
-    middleware: 'router-auth'
+  axios: {
+    debug: true,
+    proxy: {
+      'api': 'localhost:3000'
+    }
   },
 
   /*

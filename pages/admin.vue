@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  middleware: 'router-auth',
+  middleware: 'admin-routes',
   data() {
     return {
       placeholderVariable: false

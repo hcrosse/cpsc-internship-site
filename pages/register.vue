@@ -17,6 +17,7 @@
 import registerForm from '~/components/registerForm.vue'
 
 export default {
+  middleware: 'login-routes',
   layout: 'default',
   components: {
     registerForm

@@ -13,34 +13,36 @@
 
       <v-spacer />
 
-      <!--This whole part needs work -->
-      <!--<div v-if="this.$store.user.">-->
-      <!--<v-btn-->
-      <!--flat-->
-      <!--to="/admin"-->
-      <!--@click="swapToAdminView()"-->
-      <!--&gt;-->
-      <!--Admin Page-->
-      <!--</v-btn>-->
-      <!--<v-btn-->
-      <!--flat-->
-      <!--to="/"-->
-      <!--@click="attemptLogout()"-->
-      <!--&gt;-->
-      <!--Logout-->
-      <!--</v-btn>-->
-      <!--</div>-->
-      <div v-if="this.$store.user">
+      <div v-if="isAdmin">
         <v-btn
           flat
-          to="/createreview"
-          @click="navigateToReviewCreation()"
+          outline="true"
+          to="/admin"
         >
-          Create Review
+          Admin
         </v-btn>
 
         <v-btn
           flat
+          outline="true"
+          to="/"
+          @click="attemptLogout()"
+        >
+          Logout
+        </v-btn>
+      </div>
+      <div v-else-if="isAuthenticated">
+        <v-btn
+          flat
+          outline="true"
+          to="/submit"
+        >
+          Submit Review
+        </v-btn>
+
+        <v-btn
+          flat
+          outline="true"
           to="/"
           @click="attemptLogout()"
         >
@@ -82,45 +84,30 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
-      drawer: false,
-      adminLoggedIn: false,
-      userLoggedIn: false,
-      placeholderVariable: false,
       title: 'CPSC Internship Site',
       fixed: false,
       email: '',
       password: ''
     }
   },
+  computed: {
+    ...mapGetters('modules/user', [
+      'isAuthenticated',
+      'isAdmin'
+    ])
+  },
   methods: {
-    attemptLogin: function () {
-      if (this.email === 'admin') {
-        this.adminLoggedIn = true
-        this.userLoggedIn = false
-      } else {
-        this.adminLoggedIn = false
-        this.userLoggedIn = true
-      }
-    },
-    attemptLogout: function () {
-      this.userLoggedIn = false
-      this.adminLoggedIn = false
-    },
-    attemptRegister: function () {
-      this.placeholderVariable = true
-    },
-    swapToAdminView: function () {
-      /* make sure to validate/check for admin session token */
-      this.placeholderVariable = true
-    },
-    navigateToReviewCreation: function () {
-
-    },
     home: function () {
+      this.$router.push('/')
+    },
+    ...mapActions('modules/user', [ 'logout' ]),
+    attemptLogout: async function () {
+      await this.logout()
       this.$router.push('/')
     }
   }

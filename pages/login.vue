@@ -17,6 +17,7 @@
 import loginForm from '~/components/loginForm.vue'
 
 export default {
+  middleware: 'login-routes',
   layout: 'default',
   components: {
     loginForm

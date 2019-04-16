@@ -30,7 +30,7 @@
           outline
           :rules="[rules.required, rules.password]"
           @input="validate"
-          @keyup.enter="login"
+          @keyup.enter="submit"
         />
 
         <div class="small-space padded">
@@ -45,7 +45,7 @@
             class="active-btn"
             flat
             right
-            @click="login"
+            @click="submit"
           >
             Sign in
           </v-btn>
@@ -64,6 +64,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { auth } from '../plugins/firebase'
+
 export default {
   data() {
     return {
@@ -83,52 +86,29 @@ export default {
       }
     }
   },
-  computed: {
-    currUser() {
-      return this.$store.getters.admin
-    },
-    currEmail() {
-      return this.$store.getters.email
-    },
-    currVerified() {
-      return this.$store.getters.verified
-    },
-    currAdmin() {
-      return this.$store.getters.admin
-    }
-  },
   methods: {
+    ...mapActions('modules/user', ['login']),
     validate: function () {
-      // ugly bc I don't know better
       const epat = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)|(^jenniferpolack@gmail.com$)/
       const ppat = /([\S]{8,})/
       this.valid = (epat.test(this.email) && ppat.test(this.password))
     },
-    login: function () {
-      const em = this.email
-      const pa = this.password
-      // const st = this.$store
-      // this.$store.dispatch('login', { em, pa }).then((user) => {
-      //   // alert('1')
-      //   // st.dispatch('set', user)
-      // }).catch(function (error) {
-      //   const errorCode = error.code
-      //   if (errorCode === 'auth/user-not-found') {
-      //     alert('User not found. Please register an account.')
-      //   } else if (errorCode === 'auth/wrong-password') {
-      //     alert('Invalid password.')
-      //   } else if (errorCode === 'auth/user-disabled') {
-      //     alert('Account disabled.')
-      //   }
-      // })
-      // // alert(this.$store.state.user.email)
-      // if (this.$store.state.user && this.$store.state.verified) {
-      //   this.$router.push('/')
-      // } else if (this.$store.state.user && !this.$store.state.verified) {
-      //   this.$state.dispatch('resend')
-      //   this.$router.push('/verify')
-      // }
-      this.$store.dispatch('login', { em, pa })
+    submit: function () {
+      auth.signInWithEmailAndPassword(this.email, this.password).then((firebaseUser) => {
+        return this.login(firebaseUser)
+      }).then(() => {
+        // this.$forceUpdate()
+        this.$router.push('/')
+      }).catch((error) => {
+        const errorCode = error.code
+        if (errorCode === 'auth/user-not-found') {
+          alert('User not found. Please register an account.')
+        } else if (errorCode === 'auth/wrong-password') {
+          alert('Invalid password.')
+        } else if (errorCode === 'auth/user-disabled') {
+          alert('Account disabled.')
+        }
+      })
     }
   }
 }

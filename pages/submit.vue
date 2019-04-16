@@ -14,7 +14,7 @@
 import reviewComponent from '~/components/reviewComponent.vue'
 
 export default {
-  middleware: 'router-auth',
+  middleware: 'user-routes',
   layout: 'default',
   components: {
     reviewComponent

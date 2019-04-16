@@ -38,6 +38,8 @@ export default {
 
       companyName: null,
       companyAddress: null,
+      lat: null,
+      long: null,
       selectedIndustrys: [],
 
       selectedInterviewLength: null,
@@ -62,7 +64,9 @@ export default {
       if (!this.submitClickedAlready) {
         db.collection('reviews').add({
           companyname: this.companyName,
-          companyAddress: this.companyAddress,
+          // companyAddress: this.companyAddress,
+          lat: this.lat,
+          long: this.long,
           selectedIndustrys: this.selectedIndustrys,
           selectedInterviewLength: this.selectedInterviewLength,
           selectedObtainment: this.selectedObtainment,

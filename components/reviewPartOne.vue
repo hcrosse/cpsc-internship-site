@@ -34,11 +34,12 @@
         label="Company name"
         required
       />
-      <v-text-field
-        v-model="companyAddress"
-        label="Company Address"
-        required
+      <gmap-autocomplete
+        placeholder="Enter address for company"
+        @place_changed="setPlace"
       />
+
+      <hr style="margin-bottom: 30px">
 
       <h3>Select industry types that are applicable to your internship:</h3>
       <div class="mr-4 ml-4">
@@ -79,6 +80,8 @@ export default {
     return {
       companyName: null,
       companyAddress: null,
+      lat: null,
+      long: null,
       selectedIndustrys: [],
       allFieldsFilledOut: false,
       alertUser: false
@@ -100,15 +103,22 @@ export default {
         this.$parent.pageNumber = 2
       }
     },
+    setPlace(place) {
+      this.lat = place.geometry.location.lat()
+      this.long = place.geometry.location.lng()
+    },
     updateParentData: function () {
       this.$parent.companyName = this.companyName
-      this.$parent.companyAddress = this.companyAddress
+      // this.$parent.companyAddress = this.companyAddress
+      this.$parent.lat = this.lat
+      this.$parent.long = this.long
       this.$parent.selectedIndustrys = this.selectedIndustrys
     },
     validateThisPagesFields: function () {
       if (
         (!this.companyName) ||
-        (!this.companyAddress) ||
+        (!this.lat) ||
+        (!this.long) ||
         (this.selectedIndustrys === undefined || this.selectedIndustrys.length === 0)
       ) {
         this.allFieldsFilledOut = false
@@ -121,3 +131,11 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.pac-container, .pac-item {
+    width: inherit !important;
+}
+
+</style>

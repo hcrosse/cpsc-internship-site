@@ -6,10 +6,10 @@
           <v-card>
             <div class="row">
               <div class="column left">
-                <reviewListFullComponent review-status="approved" />
+                <reviewListFullComponent review-status="approved" @messagetomaps="updateMaps" />
               </div>
               <div class="column right">
-                <GoogleMap />
+                <GoogleMap ref="googleMapRef" />
               </div>
             </div>
           </v-card>
@@ -38,6 +38,13 @@ export default {
   methods: {
     exampleMethod(index) {
       this.testVariable = false
+    },
+    updateMaps(docId) {
+      // eslint-disable-next-line no-console
+      console.log('inside UPDATEMAPSYAY')
+      // eslint-disable-next-line no-console
+      console.log(docId)
+      this.$refs.googleMapRef.findPositionByDocId(docId)
     }
   }
 }

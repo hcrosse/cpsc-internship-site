@@ -79,8 +79,8 @@ export default {
           })
         })
     },
-    findPositionByDocId() {
-      const docId = 'V3AconCzFXOrOLrL8tVf'
+    findPositionByDocId(docId) {
+      // const docId = 'V3AconCzFXOrOLrL8tVf'
       for (let index = 0; index < this.firestoreReviewsQuery.length; ++index) {
         if (this.firestoreReviewsQuery[index].id === docId) {
           this.panToMarker(this.firestoreReviewsQuery[index].position)
@@ -96,7 +96,7 @@ export default {
     },
     panToMarker(marker) {
       this.$refs.mapRef.$mapPromise.then((map) => {
-        map.setZoom(12)
+        map.setZoom(8)
         map.panTo(marker)
       })
 

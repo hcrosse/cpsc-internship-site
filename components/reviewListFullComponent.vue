@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <transition name="component-fade" mode="out-in">
-        <reviewList />
+        <reviewList @messagetorlfc="messageToMaps" />
       </transition>
     </div>
   </div>
@@ -53,8 +53,10 @@ export default {
       })
   },
   methods: {
-    passIdToGrandParent() {
-
+    messageToMaps(docid) {
+      // eslint-disable-next-line no-console
+      console.log('inside rlfc messagetomaps')
+      this.$emit('messagetomaps', docid)
     }
   }
 }

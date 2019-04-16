@@ -41,9 +41,17 @@ export default {
   methods: {
     openReview(index) {
       // eslint-disable-next-line no-console
-      console.log(this.firestoreReviewsQuery[index].id)
+      console.log('insideOpenReview')
+      this.tellMapsToUpdate(index)
       this.$parent.reviewIndexClicked = index
       this.$parent.reviewOpened = true
+    },
+    tellMapsToUpdate(index) {
+      // eslint-disable-next-line no-console
+      console.log('inside rl tellmapstoupdate')
+      // console.log(this.firestoreReviewsQuery[index].id)
+
+      this.$emit('messagetorlfc', this.firestoreReviewsQuery[index].id)
     }
   }
 }

@@ -3,9 +3,9 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs24 sm24 md3>
+          <v-container class="log">
             <registerForm />
-          </v-flex>
+          </v-container>
         </v-layout>
       </v-container>
     </v-content>
@@ -35,3 +35,9 @@ export default {
   // }
 }
 </script>
+
+<style scoped>
+  .log {
+    max-width: 36em;
+  }
+</style>

@@ -16,7 +16,7 @@
       <div v-if="isAdmin">
         <v-btn
           flat
-          outline="true"
+          outline
           to="/admin"
         >
           Admin
@@ -24,7 +24,7 @@
 
         <v-btn
           flat
-          outline="true"
+          outline
           to="/"
           @click="attemptLogout()"
         >
@@ -34,7 +34,7 @@
       <div v-else-if="isAuthenticated">
         <v-btn
           flat
-          outline="true"
+          outline
           to="/submit"
         >
           Submit Review
@@ -42,7 +42,8 @@
 
         <v-btn
           flat
-          outline="true"
+          outline:
+          true
           to="/"
           @click="attemptLogout()"
         >
@@ -52,7 +53,7 @@
       <div v-else>
         <v-btn
           flat
-          outline="true"
+          outline
           to="/login"
         >
           Sign In
@@ -60,7 +61,7 @@
 
         <v-btn
           flat
-          outline="true"
+          outline
           to="/register"
         >
           Register

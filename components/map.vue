@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div>
-      <v-btn
-        @click="findPositionByDocId()"
-      >
-        Test
-      </v-btn>
-      <br>
-    </div>
-    <br>
     <gmap-map
       ref="mapRef"
       :center="center"

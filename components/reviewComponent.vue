@@ -84,7 +84,8 @@ export default {
           // this.submitClickedAlready = true,
           // router.push({ path: '/' }),
           // eslint-disable-next-line no-console
-          console.log('exiting then statement')
+          console.log('exiting then statement'),
+          this.$router.push('/')
         )
         this.submitClickedAlready = true
       }

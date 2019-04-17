@@ -41,16 +41,26 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-	{ src: '~/plugins/google-maps.js', ssr: true},
-	'@/plugins/vuetify.js',
-  '@/plugins/firebase.js'
+    { src: '~/plugins/google-maps.js', ssr: true },
+    '@/plugins/vuetify.js',
+    '@/plugins/firebase.js'
   ],
 
   /*
   ** Nuxt.js modules
   */
-  modules: ['@nuxtjs/dotenv'
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
+
+  // maybe remove later
+  axios: {
+    debug: true,
+    proxy: {
+      'api': 'localhost:3000'
+    }
+  },
 
   /*
   ** Build configuration

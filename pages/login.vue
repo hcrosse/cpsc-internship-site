@@ -3,9 +3,9 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs24 sm24 md3>
+          <v-container class="log">
             <loginForm />
-          </v-flex>
+          </v-container>
         </v-layout>
       </v-container>
     </v-content>
@@ -17,12 +17,21 @@
 import loginForm from '~/components/loginForm.vue'
 
 export default {
+  middleware: 'login-routes',
   layout: 'default',
   components: {
     loginForm
   },
   data() {
-
+    return {
+      name: 'login'
+    }
   }
 }
 </script>
+
+<style scoped>
+  .log {
+    max-width: 36em;
+  }
+</style>

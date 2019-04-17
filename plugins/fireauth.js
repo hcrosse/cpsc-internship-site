@@ -1,14 +1,12 @@
-import { auth } from 'firebase.js'
+import { auth } from './firebase'
 
 export default (context) => {
   const { store } = context
 
   return new Promise((resolve, reject) => {
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        return resolve(store.commit('setUser', user))
-      }
-      return resolve()
+      store.commit('setUser', user)
+      resolve()
     })
   })
 }

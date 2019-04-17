@@ -43,6 +43,7 @@
 import reviewListFullComponent from '~/components/adminComps/adminFullListComponent.vue'
 
 export default {
+  middleware: 'admin-routes',
   layout: 'default',
   components: {
     reviewListFullComponent

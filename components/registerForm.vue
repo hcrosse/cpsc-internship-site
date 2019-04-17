@@ -60,7 +60,6 @@
 </template>
 
 <script>
-// import { auth } from '../plugins/firebase'
 
 export default {
   data() {
@@ -92,13 +91,6 @@ export default {
     register: function () {
       const em = this.email
       const pa = this.password
-      // this.$store.dispatch('register', { em, pa }).catch(function (error) {
-      //   const errorCode = error.code
-      //   if (errorCode === 'auth/email-already-in-use') {
-      //     alert('Email already in use. Please sign in.')
-      //   }
-      // })
-      // alert(this.$store.state.email)
       this.$store.dispatch('register', { em, pa })
     }
   }

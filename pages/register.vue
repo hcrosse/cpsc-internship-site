@@ -26,13 +26,7 @@ export default {
     return {
       name: 'register'
     }
-  }// ,
-  // Fetch currently does not work correctly
-  // fetch({ store, redirect }) {
-  //   if (store.state.user) {
-  //     return redirect('/')
-  //   }
-  // }
+  }
 }
 </script>
 

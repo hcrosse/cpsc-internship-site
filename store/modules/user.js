@@ -1,4 +1,3 @@
-// import Vue from 'vue'
 import Cookies from 'js-cookie'
 import { auth } from '../../plugins/firebase'
 
@@ -46,8 +45,18 @@ export const actions = {
     Cookies.set('access_token', token) // saving token in cookie for server rendering
     await dispatch('setUSER', userInfo)
     await dispatch('saveUID', userInfo.uid)
-    // Vue.forceUpdate()
     console.log('[STORE ACTIONS] - in login, response:', status)
+  },
+
+  register({ commit }, { em, pa }) {
+    auth.createUserWithEmailAndPassword(em, pa).then(() => {
+      this.$router.push('/')
+    }).catch((error) => {
+      const errorCode = error.code
+      if (errorCode === 'auth/email-already-in-use') {
+        alert('Email already in use. Please sign in.')
+      }
+    })
   },
 
   async logout({ commit, dispatch }) {
@@ -57,7 +66,6 @@ export const actions = {
     Cookies.remove('access_token')
     commit('setUSER', null)
     commit('saveUID', null)
-    // Vue.forceUpdate()
   },
 
   saveUID({ commit }, uid) {

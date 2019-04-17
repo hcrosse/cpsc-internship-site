@@ -9,7 +9,7 @@
                 <reviewListFullComponent review-status="approved" />
               </div>
               <div class="column right">
-                <img src="../img/map.jpg">
+                <GoogleMap />
               </div>
             </div>
           </v-card>
@@ -22,11 +22,13 @@
 <script>
 
 import reviewListFullComponent from '~/components/reviewListFullComponent.vue'
+import GoogleMap from '~/components/map.vue'
 
 export default {
   layout: 'default',
   components: {
-    reviewListFullComponent
+    reviewListFullComponent,
+    GoogleMap
   },
   data() {
   }

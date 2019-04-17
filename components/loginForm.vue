@@ -97,7 +97,6 @@ export default {
       auth.signInWithEmailAndPassword(this.email, this.password).then((firebaseUser) => {
         return this.login(firebaseUser)
       }).then(() => {
-        // this.$forceUpdate()
         this.$router.push('/')
         location.reload(true)
       }).catch((error) => {

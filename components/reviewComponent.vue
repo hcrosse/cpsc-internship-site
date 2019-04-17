@@ -20,8 +20,8 @@ import part1 from '~/components/reviewPartOne.vue'
 import part2 from '~/components/reviewPartTwo.vue'
 import part3 from '~/components/reviewPartThree.vue'
 import part4 from '~/components/reviewPartFour.vue'
-
-import firebase from 'firebase'
+import { db } from '../plugins/firebase.js'
+// import { createRouter } from '../.nuxt/router.js'
 
 export default {
   layout: 'default',
@@ -34,9 +34,12 @@ export default {
   data() {
     return {
       pageNumber: 1,
+      submitClickedAlready: false,
 
       companyName: null,
       companyAddress: null,
+      lat: null,
+      long: null,
       selectedIndustrys: [],
 
       selectedInterviewLength: null,
@@ -55,21 +58,36 @@ export default {
   methods: {
     submitNewReview: function () {
       /* make sure to validate login/session token */
-      const db = firebase.firestore()
-      db.collection('reviews').add({
-        companyname: this.companyName,
-        companyAddress: this.companyAddress,
-        selectedIndustrys: this.selectedIndustrys,
-        selectedInterviewLength: this.selectedInterviewLength,
-        selectedObtainment: this.selectedObtainment,
-        selectedInterviewFormats: this.selectedInterviewFormats,
-        startdate: this.startdate,
-        enddate: this.enddate,
-        selectedEnvironment: this.selectedEnvironment,
-        selectedSkills: this.selectedSkills,
-        selectedRating: this.selectedRating,
-        summary: this.summary
-      })
+
+      // const router = createRouter()
+
+      if (!this.submitClickedAlready) {
+        db.collection('reviews').add({
+          companyname: this.companyName,
+          // companyAddress: this.companyAddress,
+          lat: this.lat,
+          long: this.long,
+          selectedIndustrys: this.selectedIndustrys,
+          selectedInterviewLength: this.selectedInterviewLength,
+          selectedObtainment: this.selectedObtainment,
+          selectedInterviewFormats: this.selectedInterviewFormats,
+          startdate: this.startdate,
+          enddate: this.enddate,
+          selectedEnvironment: this.selectedEnvironment,
+          selectedSkills: this.selectedSkills,
+          selectedRating: this.selectedRating,
+          summary: this.summary,
+          approvedByAdmin: 'pending'
+        }).then(
+          // eslint-disable-next-line no-console
+          console.log('in then statement'),
+          // this.submitClickedAlready = true,
+          // router.push({ path: '/' }),
+          // eslint-disable-next-line no-console
+          console.log('exiting then statement')
+        )
+        this.submitClickedAlready = true
+      }
     }
   }
 }

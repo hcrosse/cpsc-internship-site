@@ -17,6 +17,7 @@
 
 import singleReview from '~/components/singleReview.vue'
 import reviewList from '~/components/reviewList.vue'
+import { db } from '../plugins/firebase.js'
 
 export default {
   layout: 'default',
@@ -24,28 +25,37 @@ export default {
     singleReview,
     reviewList
   },
+  props: {
+    reviewStatus: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       reviewOpened: false,
-      reviewIndexClicked: -1
+      reviewIndexClicked: -1,
+      firestoreReviewsQuery: []
     }
   },
+  beforeMount() {
+    const self = this
+    db.collection('reviews').where('approvedByAdmin', '==', this.reviewStatus)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          const review = {
+            data: doc.data(),
+            id: doc.id
+          }
+          self.firestoreReviewsQuery.push(review)
+        })
+      })
+  },
   methods: {
-    openReview(index) {
-      this.reviewOpened = true
+    passIdToGrandParent() {
+
     }
   }
 }
 </script>
-
-<style scoped>
-.row {
-  content: "";
-  display: table;
-  clear: both;
-}
-.column {
-  float: left;
-  width: 50%;
-}
-</style>

@@ -84,6 +84,30 @@
     </div>
     <div style="text-align: center">
       <v-btn
+        color="yellow"
+        @click="editReview()"
+      >
+        EDIT
+      </v-btn>
+
+      <v-btn
+        v-if="this.$parent.reviewStatus === 'pending' || this.$parent.reviewStatus === 'approved'"
+        color="red"
+        @click="rejectReview()"
+      >
+        REJECT
+      </v-btn>
+
+      <v-btn
+        v-if="this.$parent.reviewStatus === 'pending' || this.$parent.reviewStatus === 'rejected'"
+        color="light-green"
+        @click="approveReview()"
+      >
+        APPROVE
+      </v-btn>
+    </div>
+    <div style="text-align: center">
+      <v-btn
         @click="goBack()"
       >
         BACK
@@ -93,6 +117,8 @@
 </template>
 
 <script>
+
+import { db } from '../../plugins/firebase.js'
 
 export default {
   data() {
@@ -126,10 +152,28 @@ export default {
     goBack() {
       this.$parent.reviewOpened = false
     },
+    rejectReview() {
+      this.updateReviewInDatabase('rejected')
+      this.$parent.tellParentToUpdate()
+    },
+    approveReview() {
+      this.updateReviewInDatabase('approved')
+      this.$parent.tellParentToUpdate()
+    },
+    editReview() {
+      this.updateReviewInDatabase('pending')
+      this.$parent.tellParentToUpdate()
+    },
+    updateReviewInDatabase(newStatus) {
+      const reviewReference = db.collection('reviews').doc(this.theReview.id)
+      return reviewReference.update({
+        approvedByAdmin: newStatus
+      })
+    },
     setVariables() {
       this.theReview = this.$parent.firestoreReviewsQuery[this.reviewIndexClicked]
-
       this.companyName = this.theReview.data.companyname
+
       this.companyAddress = this.theReview.data.companyAddress
       this.selectedIndustrys = this.theReview.data.selectedIndustrys
 

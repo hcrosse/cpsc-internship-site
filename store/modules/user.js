@@ -34,7 +34,6 @@ export const getters = {
 export const actions = {
 
   async login({ dispatch, state }, user) {
-    console.log('[STORE ACTIONS] - login')
     const token = await auth.currentUser.getIdToken(true)
     const userInfo = {
       name: user.displayName,
@@ -45,13 +44,13 @@ export const actions = {
     Cookies.set('access_token', token) // saving token in cookie for server rendering
     await dispatch('setUSER', userInfo)
     await dispatch('saveUID', userInfo.uid)
-    console.log('[STORE ACTIONS] - in login, response:', status)
   },
 
   register({ commit }, { em, pa }) {
     auth.createUserWithEmailAndPassword(em, pa).then(() => {
       this.$router.push('/')
     }).catch((error) => {
+      console.log(error.toString())
       const errorCode = error.code
       if (errorCode === 'auth/email-already-in-use') {
         alert('Email already in use. Please sign in.')
@@ -60,7 +59,6 @@ export const actions = {
   },
 
   async logout({ commit, dispatch }) {
-    console.log('[STORE ACTIONS] - logout')
     await auth.signOut()
 
     Cookies.remove('access_token')
@@ -69,7 +67,6 @@ export const actions = {
   },
 
   saveUID({ commit }, uid) {
-    console.log('[STORE ACTIONS] - saveUID')
     commit('saveUID', uid)
   },
 
@@ -81,11 +78,9 @@ export const actions = {
 
 export const mutations = {
   saveUID(state, uid) {
-    console.log('[STORE MUTATIONS] - saveUID:', uid)
     state.uid = uid
   },
   setUSER(state, user) {
-    console.log('[STORE MUTATIONS] - setUSER:', user)
     state.user = user
   }
 }

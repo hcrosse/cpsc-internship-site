@@ -91,7 +91,7 @@ export default {
     register: function () {
       const em = this.email
       const pa = this.password
-      this.$store.dispatch('register', { em, pa })
+      this.$store.dispatch('modules/user/register', { em, pa })
     }
   }
 }

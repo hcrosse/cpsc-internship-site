@@ -1,18 +1,10 @@
 <template>
   <div>
-    <div>
-      <v-btn
-        @click="testMethod()"
-      >
-        Test
-      </v-btn>
-      <br>
-    </div>
-    <br>
     <gmap-map
+      ref="mapRef"
       :center="center"
-      :zoom="12"
-      style="width:100%;  height: 400px;"
+      :zoom="4"
+      style="width:100%;  height: 525px;"
       :options="{
         zoomControl: true,
         mapTypeControl: false,
@@ -41,39 +33,61 @@ export default {
   name: 'GoogleMap',
   data() {
     return {
-      // defaults to Fredericksburg, VA
-      center: { lat: 38.303299, lng: -77.460663 },
+      // defaults to view of north america
+      center: { lat: 39.33554, lng: -98.72468 },
       markers: [],
-      // { position: { lat: 38.303299, lng: -77.460663 } },
-      // { position: { lat: 38.468369, lng: -77.440102 } },
-      // { position: { lat: 38.336310, lng: -77.051540 } }],
       places: [],
       currentPlace: null,
       firestoreReviewsQuery: []
     }
   },
   beforeMount() {
-    const self = this
-    db.collection('reviews').where('approvedByAdmin', '==', 'approved')
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          const review = {
-            position: { lat: doc.data().lat, lng: doc.data().long },
-            id: doc.id
-          }
-          self.firestoreReviewsQuery.push(review)
-          self.markers.push({ position: review.position })
-          // this.places.push(this.currentPlace)
-          // eslint-disable-next-line no-console
-          // console.log(review)
-        })
-      })
+    this.refreshMap()
   },
   methods: {
     testMethod() {
       // eslint-disable-next-line no-console
       console.log(this.firestoreReviewsQuery[0].position)
+    },
+    refreshMap() {
+      const self = this
+      db.collection('reviews').where('approvedByAdmin', '==', 'approved')
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            const review = {
+              position: { lat: doc.data().lat, lng: doc.data().long },
+              id: doc.id
+            }
+            self.firestoreReviewsQuery.push(review)
+            self.markers.push({ position: review.position })
+          // this.places.push(this.currentPlace)
+          // eslint-disable-next-line no-console
+          // console.log(review)
+          })
+        })
+    },
+    findPositionByDocId(docId) {
+      if (docId === 'reset') {
+        const levelOfZoomOnReset = 4
+        const marker = { lat: 39.33554, lng: -98.72468 }
+        this.panToMarker(marker, levelOfZoomOnReset)
+      } else {
+        const zoomLevel = 8
+        for (let index = 0; index < this.firestoreReviewsQuery.length; ++index) {
+          if (this.firestoreReviewsQuery[index].id === docId) {
+            this.panToMarker(this.firestoreReviewsQuery[index].position, zoomLevel)
+          }
+        }
+      }
+    },
+    panToMarker(marker, zoomLevel) {
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        map.setZoom(zoomLevel)
+        map.panTo(marker)
+      })
+
+      // this.$refs.mapRef.setCenter(this.firestoreReviewsQuery[0].position)
     }
   }
 }

@@ -2,12 +2,12 @@
   <div class="fullcard">
     <div v-if="reviewOpened">
       <transition name="component-fade" mode="out-in">
-        <singleReview />
+        <singleReview @messagefromSR="messageToMaps" />
       </transition>
     </div>
     <div v-else>
       <transition name="component-fade" mode="out-in">
-        <reviewList />
+        <reviewList @messagetorlfc="messageToMaps" />
       </transition>
     </div>
   </div>
@@ -53,8 +53,10 @@ export default {
       })
   },
   methods: {
-    passIdToGrandParent() {
-
+    messageToMaps(docid) {
+      // eslint-disable-next-line no-console
+      console.log('inside rlfc messagetomaps')
+      this.$emit('messagetomaps', docid)
     }
   }
 }

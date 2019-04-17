@@ -124,6 +124,7 @@ export default {
   },
   methods: {
     goBack() {
+      this.$emit('messagefromSR', 'reset')
       this.$parent.reviewOpened = false
     },
     setVariables() {

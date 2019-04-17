@@ -4,7 +4,7 @@
       ref="mapRef"
       :center="center"
       :zoom="4"
-      style="width:100%;  height: 400px;"
+      style="width:100%;  height: 525px;"
       :options="{
         zoomControl: true,
         mapTypeControl: false,

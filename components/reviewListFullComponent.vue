@@ -2,7 +2,7 @@
   <div class="fullcard">
     <div v-if="reviewOpened">
       <transition name="component-fade" mode="out-in">
-        <singleReview />
+        <singleReview @messagefromSR="messageToMaps" />
       </transition>
     </div>
     <div v-else>

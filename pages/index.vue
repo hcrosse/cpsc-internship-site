@@ -9,7 +9,7 @@
                 <reviewListFullComponent />
               </div>
               <div class="column right">
-                <GoogleMap />
+                <img src="../img/map.jpg">
               </div>
             </div>
           </v-card>
@@ -22,23 +22,13 @@
 <script>
 
 import reviewListFullComponent from '~/components/reviewListFullComponent.vue'
-import GoogleMap from '~/components/map.vue'
 
 export default {
   layout: 'default',
   components: {
-    reviewListFullComponent,
-    GoogleMap
+    reviewListFullComponent
   },
   data() {
-    return {
-      testVariable: false
-    }
-  },
-  methods: {
-    exampleMethod(index) {
-      this.testVariable = false
-    }
   }
 }
 </script>

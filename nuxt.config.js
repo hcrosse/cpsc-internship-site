@@ -1,6 +1,5 @@
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
-require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -41,22 +40,29 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-	{ src: '~/plugins/google-maps.js', ssr: true},
-	'@/plugins/vuetify.js',
-    	'@/plugins/firebase.js'
+    '@/plugins/vuetify',
+    '@/plugins/firebase.js'
   ],
 
   /*
   ** Nuxt.js modules
   */
-  modules: ['@nuxtjs/dotenv'
+  modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    debug: true,
+    proxy: {
+      'api': 'localhost:3000'
+    }
+  },
 
   /*
   ** Build configuration
   */
   build: {
-    transpile: ['vuetify/lib', /^vue2-google-maps($|\/)/],
+    transpile: ['vuetify/lib'],
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
       stylus: {

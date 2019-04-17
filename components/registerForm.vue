@@ -4,7 +4,7 @@
       <!-- logo goes here -->
 
       <p class="title small-space">
-        Sign in
+        Register
       </p>
 
       <v-form>
@@ -30,24 +30,20 @@
           outline
           :rules="[rules.required, rules.password]"
           @input="validate"
-          @keyup.enter="submit"
+          @keyup.enter="register"
         />
 
-        <div class="small-space padded">
-          <a href="/reset" class="link">Forgot password?</a>
-        </div>
-
         <div class="big-space l-pad opposite">
-          <a href="/register" class="link small-space">Register</a>
+          <a href="/login" class="link small-space">Sign in</a>
 
           <v-btn
             v-if="valid"
             class="active-btn"
             flat
             right
-            @click="submit"
+            @click="register"
           >
-            Sign in
+            Register
           </v-btn>
           <v-btn
             v-else
@@ -55,7 +51,7 @@
             right
             disabled
           >
-            Sign in
+            Register
           </v-btn>
         </div>
       </v-form>
@@ -64,8 +60,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { auth } from '../plugins/firebase'
+// import { auth } from '../plugins/firebase'
 
 export default {
   data() {
@@ -76,7 +71,7 @@ export default {
       rules: {
         required: value => !!value || 'Required',
         email: (value) => {
-          const pattern = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)|(^jenniferpolack@gmail.com$)/
+          const pattern = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)/
           return pattern.test(value) || 'Must be a valid UMW email'
         },
         password: (value) => {
@@ -86,30 +81,25 @@ export default {
       }
     }
   },
+
   methods: {
-    ...mapActions('modules/user', ['login']),
     validate: function () {
-      const epat = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)|(^jenniferpolack@gmail.com$)/
+      // ugly bc I don't know better
+      const epat = /(^[a-z0-9A-Z]{2,10}@(mail.)?umw.edu$)/
       const ppat = /([\S]{8,})/
       this.valid = (epat.test(this.email) && ppat.test(this.password))
     },
-    submit: function () {
-      auth.signInWithEmailAndPassword(this.email, this.password).then((firebaseUser) => {
-        return this.login(firebaseUser)
-      }).then(() => {
-        // this.$forceUpdate()
-        this.$router.push('/')
-        location.reload(true)
-      }).catch((error) => {
-        const errorCode = error.code
-        if (errorCode === 'auth/user-not-found') {
-          alert('User not found. Please register an account.')
-        } else if (errorCode === 'auth/wrong-password') {
-          alert('Invalid password.')
-        } else if (errorCode === 'auth/user-disabled') {
-          alert('Account disabled.')
-        }
-      })
+    register: function () {
+      const em = this.email
+      const pa = this.password
+      // this.$store.dispatch('register', { em, pa }).catch(function (error) {
+      //   const errorCode = error.code
+      //   if (errorCode === 'auth/email-already-in-use') {
+      //     alert('Email already in use. Please sign in.')
+      //   }
+      // })
+      // alert(this.$store.state.email)
+      this.$store.dispatch('register', { em, pa })
     }
   }
 }

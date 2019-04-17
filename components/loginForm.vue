@@ -99,6 +99,7 @@ export default {
       }).then(() => {
         // this.$forceUpdate()
         this.$router.push('/')
+        location.reload(true)
       }).catch((error) => {
         const errorCode = error.code
         if (errorCode === 'auth/user-not-found') {

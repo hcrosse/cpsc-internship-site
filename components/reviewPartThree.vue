@@ -5,7 +5,7 @@
         :value="alertUser"
         type="error"
       >
-        Please select an option from all dropdown menus, and select atleast one interview type
+        Please select an option from all dropdown menus, fill out all data fields, and select atleast one skill utilized
       </v-alert>
       <div class="row">
         <div class="column prevPage">

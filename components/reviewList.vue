@@ -134,34 +134,8 @@ export default {
   data() {
     return {
       selected: [2],
-      sortBy: 'Lowest Rating',
-      sortCategories: ['Newest', 'Oldest', 'Highest Rating', 'Lowest Rating', 'Company Name'],
-      /*
-      item-value="orderBy"
-      item-text="displayText"
-      [
-        {
-          orderBy: 'selectedRating',
-          displayText: 'Newest1'
-        },
-        {
-          orderBy: 'companyname',
-          displayText: 'Oldest1'
-        },
-        {
-          orderBy: 'companyname',
-          displayText: 'Highest Rating1'
-        },
-        {
-          orderBy: 'companyname',
-          displayText: 'Lowest Rating1'
-        },
-        {
-          orderBy: 'companyname',
-          displayText: 'Company Name1'
-        }
-      ]
-      */
+      sortBy: 'Newest',
+      sortCategories: ['Newest', 'Highest Rating', 'Company Name (Z-A)', 'Company Name (A-Z)'],
       firestoreReviewsQuery: this.$parent.firestoreReviewsQuery
     }
   },
@@ -175,41 +149,26 @@ export default {
       if (!reviews) return reviews
       else if (this.sortBy === 'Highest Rating') {
         console.log('in highest rating')
-        reviews.sort(function (x, y) {
-          console.log(y.data.enddate)
-          return y.data.enddate - x.data.enddate
-        })
-        return reviews
-        /*
-        return reviews.filter((singleReview) => {
-          if (singleReview.data.selectedRating) return singleReview
-        })
-      */
-      } else if (this.sortBy === 'Lowest Rating') {
-        console.log('in lowest rating')
-        return reviews.filter((singleReview) => {
-          if (singleReview.data.selectedRating) return singleReview
-        })
-      } else if (this.sortBy === 'Oldest') {
-        console.log('in oldest')
-        return reviews.filter((singleReview) => {
-          if (singleReview.data.enddate) return singleReview
+        return reviews.sort(function (x, y) {
+          return y.data.numericalRating > x.data.numericalRating
         })
       } else if (this.sortBy === 'Newest') {
         console.log('in newest')
-        return reviews.filter((singleReview) => {
-          if (singleReview.data.startdate) return singleReview
+        return reviews.sort(function (x, y) {
+          return y.data.dateReviewAdded > x.data.dateReviewAdded
         })
-      } else if (this.sortBy === 'Company Name') {
+      } else if (this.sortBy === 'Company Name (Z-A)') {
+        console.log('in oldest')
+        return reviews.sort(function (x, y) {
+          return y.data.companyname > x.data.companyname
+        })
+      } else if (this.sortBy === 'Company Name (A-Z)') {
         console.log('in comp name')
-        return reviews.filter((singleReview) => {
-          if (singleReview.data.companyname) return singleReview
+        return reviews.sort(function (x, y) {
+          return y.data.companyname < x.data.companyname
         })
       } else {
-        return reviews.filter((singleReview) => {
-          console.log('in else')
-          if (singleReview.data.companyname) return singleReview
-        })
+        return reviews
       }
     },
     openReview(index) {

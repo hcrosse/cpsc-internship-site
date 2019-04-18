@@ -11,13 +11,6 @@
         </p>
       </div>
       <hr class="singleReviewBreak">
-      <div>
-        <p><b>Company Address:</b></p>
-        <p style="text-align: center">
-          {{ companyAddress }}
-        </p>
-      </div>
-      <hr class="singleReviewBreak">
       <div class="greyDiv">
         <p><b>Relevant Industrys:</b></p>
         <p style="text-align: center">

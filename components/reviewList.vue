@@ -1,11 +1,18 @@
 <template>
   <div class="reviewList">
+    <v-select
+      v-model="sortBy"
+      :items="sortCategories"
+      label="Sort list by:"
+      outline
+    />
+
     <v-list
       two-line
       style="max-height: 525px"
       class="scroll-y"
     >
-      <template v-for="(review, index) in firestoreReviewsQuery">
+      <template v-for="(review, index) in listItems">
         <v-list-tile
           :key="review.id"
           avatar
@@ -117,6 +124,7 @@
         />
       </template>
     </v-list>
+    </v-select>
   </div>
 </template>
 
@@ -126,10 +134,84 @@ export default {
   data() {
     return {
       selected: [2],
+      sortBy: 'Lowest Rating',
+      sortCategories: ['Newest', 'Oldest', 'Highest Rating', 'Lowest Rating', 'Company Name'],
+      /*
+      item-value="orderBy"
+      item-text="displayText"
+      [
+        {
+          orderBy: 'selectedRating',
+          displayText: 'Newest1'
+        },
+        {
+          orderBy: 'companyname',
+          displayText: 'Oldest1'
+        },
+        {
+          orderBy: 'companyname',
+          displayText: 'Highest Rating1'
+        },
+        {
+          orderBy: 'companyname',
+          displayText: 'Lowest Rating1'
+        },
+        {
+          orderBy: 'companyname',
+          displayText: 'Company Name1'
+        }
+      ]
+      */
       firestoreReviewsQuery: this.$parent.firestoreReviewsQuery
     }
   },
+  computed: {
+    listItems() {
+      return this.sortedListItems(this.firestoreReviewsQuery)
+    }
+  },
   methods: {
+    sortedListItems(reviews) {
+      if (!reviews) return reviews
+      else if (this.sortBy === 'Highest Rating') {
+        console.log('in highest rating')
+        reviews.sort(function (x, y) {
+          console.log(y.data.enddate)
+          return y.data.enddate - x.data.enddate
+        })
+        return reviews
+        /*
+        return reviews.filter((singleReview) => {
+          if (singleReview.data.selectedRating) return singleReview
+        })
+      */
+      } else if (this.sortBy === 'Lowest Rating') {
+        console.log('in lowest rating')
+        return reviews.filter((singleReview) => {
+          if (singleReview.data.selectedRating) return singleReview
+        })
+      } else if (this.sortBy === 'Oldest') {
+        console.log('in oldest')
+        return reviews.filter((singleReview) => {
+          if (singleReview.data.enddate) return singleReview
+        })
+      } else if (this.sortBy === 'Newest') {
+        console.log('in newest')
+        return reviews.filter((singleReview) => {
+          if (singleReview.data.startdate) return singleReview
+        })
+      } else if (this.sortBy === 'Company Name') {
+        console.log('in comp name')
+        return reviews.filter((singleReview) => {
+          if (singleReview.data.companyname) return singleReview
+        })
+      } else {
+        return reviews.filter((singleReview) => {
+          console.log('in else')
+          if (singleReview.data.companyname) return singleReview
+        })
+      }
+    },
     openReview(index) {
       // eslint-disable-next-line no-console
       console.log('insideOpenReview')

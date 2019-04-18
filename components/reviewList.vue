@@ -9,7 +9,7 @@
 
     <v-list
       two-line
-      style="max-height: 525px"
+      style="max-height: 430px"
       class="scroll-y"
     >
       <template v-for="(review, index) in listItems">

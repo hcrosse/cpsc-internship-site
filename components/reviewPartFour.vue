@@ -4,7 +4,7 @@
       :value="alertUser"
       type="error"
     >
-      Please select an option from all dropdown menus, and select atleast one interview type
+      Please select a rating for your company, a provide a brief summary of your experience
     </v-alert>
     <div class="row">
       <div class="column prevPage">

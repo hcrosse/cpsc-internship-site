@@ -12,6 +12,9 @@
     <div v-else-if="pageNumber==4">
       <part4 />
     </div>
+    <p style="text-align: center">
+      <i>Please note that reviews will submitted to the site administrator for approval before being viewable by others</i>
+    </p>
   </div>
 </template>
 

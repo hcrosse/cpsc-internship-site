@@ -1,6 +1,7 @@
 # cpsc-internship-site
 
-> My praiseworthy Nuxt.js project
+> An internship review process, made for the University of Mary Washington.
+> Hosted at [polack-internship.appspot.com](https://polack-internship.appspot.com/)
 
 ## Build Setup
 

@@ -8,6 +8,10 @@
 # install dependencies
 $ npm install
 
+# replace the google maps api key in /plugins/google-maps.js with your own key
+
+# replace the firebase config in /plugings/firebase.js with your own data from the firebase console
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 

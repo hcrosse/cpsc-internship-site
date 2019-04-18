@@ -91,28 +91,28 @@
       <div class="mr-4 ml-4">
         <v-layout row wrap>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="Python" value="python" />
+            <v-checkbox v-model="selectedSkills" label="Python" value="Python" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="Java" value="java" />
+            <v-checkbox v-model="selectedSkills" label="Java" value="Java" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="Javascript" value="js" />
+            <v-checkbox v-model="selectedSkills" label="Javascript" value="Javascript" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="C++/C" value="cpp" />
+            <v-checkbox v-model="selectedSkills" label="C++/C" value="C++/C" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="Linux" value="linux" />
+            <v-checkbox v-model="selectedSkills" label="Linux" value="Linux" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="Ruby" value="ruby" />
+            <v-checkbox v-model="selectedSkills" label="Ruby" value="Ruby" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="PHP" value="php" />
+            <v-checkbox v-model="selectedSkills" label="PHP" value="PHP" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedSkills" label="C#" value="csharp" />
+            <v-checkbox v-model="selectedSkills" label="C#" value="C#" />
           </v-flex>
         </v-layout>
       </div>

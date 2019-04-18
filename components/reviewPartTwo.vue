@@ -46,10 +46,10 @@
         />
       </v-flex>
       <h3>Please select all of the interview types you took during the hiring process</h3>
-      <v-checkbox v-model="selectedInterviewFormats" label="Phone interview" value="phone" />
-      <v-checkbox v-model="selectedInterviewFormats" label="Video interview" value="video" />
-      <v-checkbox v-model="selectedInterviewFormats" label="In person interview" value="inperson" />
-      <v-checkbox v-model="selectedInterviewFormats" label="Other" value="other" />
+      <v-checkbox v-model="selectedInterviewFormats" label="Phone interview" value="Phone interview" />
+      <v-checkbox v-model="selectedInterviewFormats" label="Video interview" value="Video interview" />
+      <v-checkbox v-model="selectedInterviewFormats" label="In person interview" value="In person interview" />
+      <v-checkbox v-model="selectedInterviewFormats" label="Other" value="Other" />
     </div>
   </div>
 </template>

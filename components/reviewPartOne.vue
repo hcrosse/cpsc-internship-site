@@ -45,28 +45,28 @@
       <div class="mr-4 ml-4">
         <v-layout row wrap>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Government Contracting" value="gov" />
+            <v-checkbox v-model="selectedIndustrys" label="Government Contracting" value="Government Contracting" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Education" value="edu" />
+            <v-checkbox v-model="selectedIndustrys" label="Education" value="Education" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Web Development" value="web" />
+            <v-checkbox v-model="selectedIndustrys" label="Web Development" value="Web Development" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Application Development" value="app" />
+            <v-checkbox v-model="selectedIndustrys" label="Application Development" value="Application Development" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Software Development" value="software" />
+            <v-checkbox v-model="selectedIndustrys" label="Software Development" value="Software Development" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Hardware / Systems" value="hardware" />
+            <v-checkbox v-model="selectedIndustrys" label="Hardware / Systems" value="Hardware / Systems" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="IT and Services" value="it" />
+            <v-checkbox v-model="selectedIndustrys" label="IT Services" value="IT Services" />
           </v-flex>
           <v-flex xs6>
-            <v-checkbox v-model="selectedIndustrys" label="Research" value="research" />
+            <v-checkbox v-model="selectedIndustrys" label="Research" value="Research" />
           </v-flex>
         </v-layout>
       </div>

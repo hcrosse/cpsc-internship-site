@@ -150,22 +150,24 @@ export default {
       else if (this.sortBy === 'Highest Rating') {
         console.log('in highest rating')
         return reviews.sort(function (x, y) {
-          return y.data.numericalRating > x.data.numericalRating
+          return y.data.numericalRating - x.data.numericalRating
         })
       } else if (this.sortBy === 'Newest') {
         console.log('in newest')
         return reviews.sort(function (x, y) {
-          return y.data.dateReviewAdded > x.data.dateReviewAdded
+          let dateX = x.data.dateReviewAdded.toDate()
+          let dateY = y.data.dateReviewAdded.toDate()
+          return dateY - dateX
         })
       } else if (this.sortBy === 'Company Name (Z-A)') {
-        console.log('in oldest')
+        console.log('in compname z-a')
         return reviews.sort(function (x, y) {
-          return y.data.companyname > x.data.companyname
+          return y.data.companyname.toLowerCase().localeCompare(x.data.companyname.toLowerCase())
         })
       } else if (this.sortBy === 'Company Name (A-Z)') {
-        console.log('in comp name')
+        // console.log('in comp name a-z')
         return reviews.sort(function (x, y) {
-          return y.data.companyname < x.data.companyname
+          return x.data.companyname.toLowerCase().localeCompare(y.data.companyname.toLowerCase())
         })
       } else {
         return reviews

@@ -7,7 +7,7 @@
     >
       <template v-for="(review, index) in firestoreReviewsQuery">
         <v-list-tile
-          :key="review.data.companyname"
+          :key="review.id"
           avatar
           ripple
           @click="openReview(index)"

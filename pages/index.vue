@@ -4,6 +4,13 @@
       <v-container fluid fill-height>
         <v-layout child-flex>
           <v-card>
+            <br>
+            <h3 style="text-align: center">
+              Welcome to the UMW Computer Science Internship Review webpage.<br>
+              This website provides UMW students the ability to read and write internship reviews for companies that other students have worked for.
+            </h3>
+            <hr>
+            <br>
             <div class="row">
               <div class="column left">
                 <reviewListFullComponent review-status="approved" @messagetomaps="updateMaps" />

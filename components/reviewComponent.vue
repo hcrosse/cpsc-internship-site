@@ -60,9 +60,21 @@ export default {
   },
   methods: {
     submitNewReview: function () {
-      /* make sure to validate login/session token */
-
-      // const router = createRouter()
+      // this variable used to sort reviews later in main list
+      let currentTime = new Date()
+      // this if block used to sort reviews by numerical rating instead of converting from text later
+      let numericalRating = 0
+      if (this.selectedRating === 'Very Good') {
+        numericalRating = 5
+      } else if (this.selectedRating === 'Good') {
+        numericalRating = 4
+      } else if (this.selectedRating === 'Average') {
+        numericalRating = 3
+      } else if (this.selectedRating === 'Bad') {
+        numericalRating = 2
+      } else {
+        numericalRating = 1
+      }
 
       if (!this.submitClickedAlready) {
         db.collection('reviews').add({
@@ -79,8 +91,10 @@ export default {
           selectedEnvironment: this.selectedEnvironment,
           selectedSkills: this.selectedSkills,
           selectedRating: this.selectedRating,
+          numericalRating: numericalRating,
           summary: this.summary,
-          approvedByAdmin: 'pending'
+          approvedByAdmin: 'pending',
+          dateReviewAdded: currentTime
         }).then(
           this.$router.push('/')
         )

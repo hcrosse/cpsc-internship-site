@@ -47,12 +47,26 @@ export default {
       this.testVariable = false
     },
     updateMaps(docId) {
-      // eslint-disable-next-line no-console
-      console.log('inside UPDATEMAPSYAY')
-      // eslint-disable-next-line no-console
-      console.log(docId)
       this.$refs.googleMapRef.findPositionByDocId(docId)
     }
+    /*  //Test function to update all reviews in database by button click.
+        //replace dateReviewAdded: currentTime
+            //with what you want all reviews to add, and call this function on a button
+    ,
+    testfunction() {
+      db.collection('reviews')
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            let currentTime = new Date()
+            const reviewReference = db.collection('reviews').doc(doc.id)
+            return reviewReference.update({
+              dateReviewAdded: currentTime
+            })
+          })
+        })
+    }
+    */
   }
 }
 </script>

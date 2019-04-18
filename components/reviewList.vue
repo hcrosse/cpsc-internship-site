@@ -12,13 +12,104 @@
           ripple
           @click="openReview(index)"
         >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ review.data.companyname }}</v-list-tile-title>
-            <v-list-tile-sub-title class="text--primary">
-              {{ review.data.companyAddress }}
-            </v-list-tile-sub-title>
-            <v-list-tile-sub-title>{{ review.data.summary }}</v-list-tile-sub-title>
-          </v-list-tile-content>
+          <div style="width:60%">
+            <v-list-tile-content>
+              <v-list-tile-title><b>{{ review.data.companyname }}</b></v-list-tile-title>
+              <v-list-tile-sub-title class="text--primary">
+                {{ review.data.selectedEnvironment }}
+              </v-list-tile-sub-title>
+              <v-list-tile-sub-title><i>{{ review.data.summary }}</i></v-list-tile-sub-title>
+            </v-list-tile-content>
+          </div>
+          <div style="width:40%; display: flex; justify-content: flex-end">
+            <v-list-tile-action style="display:inline">
+              <div v-if="review.data.selectedRating === 'Very Good'">
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+              </div>
+              <div v-if="review.data.selectedRating === 'Good'">
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+              </div>
+              <div v-if="review.data.selectedRating === 'Average'">
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star_half
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+              </div>
+              <div v-if="review.data.selectedRating === 'Bad'">
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+              </div>
+              <div v-if="review.data.selectedRating === 'Very Bad'">
+                <v-icon
+                  color="yellow darken-2"
+                >
+                  star_half
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+                <v-icon
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+              </div>
+            </v-list-tile-action>
+          </div>
         </v-list-tile>
         <v-divider
           v-if="index + 1 < firestoreReviewsQuery.length"

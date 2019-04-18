@@ -14,7 +14,7 @@
       <div class="greyDiv">
         <p><b>Relevant Industrys:</b></p>
         <p style="text-align: center">
-          {{ selectedIndustrys }}
+          {{ singleStringSelectedIndustrys }}
         </p>
       </div>
       <hr class="singleReviewBreak">
@@ -35,7 +35,7 @@
       <div>
         <p><b>Interview types I recieved:</b></p>
         <p style="text-align: center">
-          {{ selectedInterviewFormats }}
+          {{ singleStringSelectedInterviewFormats }}
         </p>
       </div>
       <hr class="singleReviewBreak">
@@ -56,7 +56,7 @@
       <div class="greyDiv">
         <p><b>Skills utilitzed:</b></p>
         <p style="text-align: center">
-          {{ selectedSkills }}
+          {{ singleStringSelectedSkills }}
         </p>
       </div>
       <hr class="singleReviewBreak">
@@ -109,7 +109,12 @@ export default {
       selectedSkills: [''],
 
       selectedRating: '',
-      summary: ''
+      summary: '',
+
+      singleStringSelectedInterviewFormats: '',
+      singleStringSelectedIndustrys: '',
+      singleStringSelectedSkills: ''
+
     }
   },
   beforeMount() {
@@ -138,6 +143,10 @@ export default {
 
       this.selectedRating = this.theReview.data.selectedRating
       this.summary = this.theReview.data.summary
+
+      this.singleStringSelectedInterviewFormats = this.selectedInterviewFormats.join(', ')
+      this.singleStringSelectedIndustrys = this.selectedIndustrys.join(', ')
+      this.singleStringSelectedSkills = this.selectedSkills.join(', ')
     }
   }
 }
